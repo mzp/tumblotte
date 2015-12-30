@@ -1,17 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore, combineReducers } from 'redux';
-import posts from './reducers/posts';
-import App from './containers/App';
+import { render } from 'react-dom';
+import configureStore from './store/configureStore';
+import Root from './containers/Root';
 
-const store = createStore(combineReducers({ posts }));
+const store = configureStore();
 const mountNode = document.getElementById('root');
 
-ReactDOM.render(
-    <div>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </div>,
-    mountNode);
+render(
+  <Root store={store} />,
+  mountNode);
