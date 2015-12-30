@@ -3,22 +3,21 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import postsActions from '../actions/posts';
 import Sidebar from '../components/Sidebar';
+import Editor from '../components/Editor';
+import Preview from '../components/Preview';
 
 class App extends React.Component {
   render() {
     const { posts , dispatch } = this.props;
     const actions = bindActionCreators(postsActions, dispatch);
+    const post = posts.find((post) => post.selected);
 
     return (
       <div id="layout">
         <Sidebar posts={posts} onSelect={actions.select} />
         <div id="main" className="pure-g">
-          <div id="editor" className="pure-u-1-2 pure-form pure-group">
-            <textarea />
-          </div>
-          <div id="preview" className="pure-u-1-2">
-            <p>preview</p>
-          </div>
+          <Editor post={post} />
+          <Preview post={post} />
         </div>
       </div>);
   }

@@ -1,5 +1,4 @@
 import React from 'react';
-import postsActions from '../actions/posts';
 
 export default class Sidebar extends React.Component {
   select(post) {
@@ -19,6 +18,7 @@ export default class Sidebar extends React.Component {
                 className={className}
                 onClick={::this.select.bind(this, post)}>
                 <h4>{post.title}</h4>
+                <p className='email-desc'>{post.body.substring(0, 20)}</p>
               </div>);
       });
 

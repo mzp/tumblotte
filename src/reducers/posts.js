@@ -1,8 +1,9 @@
 import { handleActions } from 'redux-actions';
+import Post from '../values/Post';
 
 const POSTS = [
-  { id: 0, title: 'Hello', selected: false },
-  { id: 1, title: 'World', selected: false }
+  new Post(0, 'Hello World 1\nthe test post'),
+  new Post(1, 'Hello World 2\nthe next post'),
 ];
 
 export default handleActions({
@@ -12,9 +13,9 @@ export default handleActions({
   SELECT: (state, action) => {
     return state.map((post) => {
       if (post.id == action.payload.id) {
-        return { ...post, selected: true }
+        return post.select()
       } else {
-        return { ...post, selected: false }
+        return post.unselect()
       }
     });
   }
