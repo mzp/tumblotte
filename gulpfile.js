@@ -7,7 +7,7 @@ var fs = require("fs");
 gulp.task('build', function() {
   browserify({ entries: ['app/js/main.js'] })
     .transform(babelify, {
-      "presets": ["es2015", "stage-0", "react"]
+      presets: ['stage-1', 'es2015', 'react']
     })
     .bundle()
     .pipe(fs.createWriteStream("bundle/main.js"));
