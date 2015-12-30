@@ -19,6 +19,7 @@
     "browserify": "^12.0.1",
     "electron-packager": "^5.2.0",
     "gulp": "^3.9.0",
+    "preprocessify": "0.0.6",
     "redux-devtools": "^3.0.1",
     "redux-devtools-dock-monitor": "^1.0.1",
     "redux-devtools-log-monitor": "^1.0.1",
