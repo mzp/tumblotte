@@ -1,19 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { connect, Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import { createStore, combineReducers } from 'redux';
+import posts from './reducers/posts';
+import App from './containers/App';
 
-
-@connect((state) => state)
-class App extends React.Component {
-    render() {
-      return <div>Hello World</div>;
-    }
-}
-
-let store = createStore(function(state, _) { return state; });
-
-let mountNode = document.getElementById('root');
+const store = createStore(combineReducers({ posts }));
+const mountNode = document.getElementById('root');
 
 ReactDOM.render(
     <div>
