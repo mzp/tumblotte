@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import postsActions from '../actions/posts';
 import Sidebar from '../components/Sidebar';
+import Nav from '../components/Nav';
 
 class App extends React.Component {
   render() {
@@ -10,8 +11,10 @@ class App extends React.Component {
     const actions = bindActionCreators(postsActions, dispatch);
 
     return (
-      <div>
+      <div id="layout">
+        <Nav />
         <Sidebar posts={posts} onSelect={actions.select} />
+        <div id="main"><p>ここに文書がはいるはず</p></div>
       </div>);
   }
 }

@@ -1,6 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import postsActions from '../actions/posts';
 
 export default class Sidebar extends React.Component {
@@ -13,14 +11,17 @@ export default class Sidebar extends React.Component {
     const { posts } = this.props;
     const items =
       posts.map((post) => {
+          const className =
+            `email-item ${post.selected ? 'email-item-selected' : ''}`;
+
           return (
-              <li key={post.id}
-                class={post.selected ? 'selecetd' : ''}
+              <div key={post.id}
+                className={className}
                 onClick={::this.select.bind(this, post)}>
-                {post.title}
-              </li>);
+                <h4>{post.title}</h4>
+              </div>);
       });
 
-    return <ul>{items}</ul>;
+    return <div id="list">{items}</div>;
   }
 }
