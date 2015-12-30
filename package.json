@@ -20,6 +20,7 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
+    "electron-prebuilt": "^0.36.2",
     "react": "^0.14.5",
     "react-dom": "^0.14.5",
     "react-redux": "^4.0.6",
