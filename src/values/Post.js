@@ -13,16 +13,16 @@ export default class Post {
     return new Post(this.id, this.content, false);
   }
 
-  info() {
-    const [title, body] = this.content.split('\n', 2);
-    return { title, body }
+  change(content) {
+    return new Post(this.id, content, this.selected);
   }
 
   get title() {
-    return this.info().title;
+    const [title] = this.content.split('\n', 1);
+    return title;
   }
 
   get body() {
-    return this.info().title;
+    return this.content.substring(this.title.length);
   }
 }
