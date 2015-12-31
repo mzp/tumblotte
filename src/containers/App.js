@@ -5,8 +5,15 @@ import postsActions from '../actions/posts';
 import Sidebar from '../components/Sidebar';
 import Editor from '../components/Editor';
 import Preview from '../components/Preview';
+import menu from '../electron/MainMenu';
 
 class App extends React.Component {
+  componentDidMount() {
+    const { dispatch } = this.props;
+    const actions = bindActionCreators(postsActions, dispatch);
+    menu(actions);
+  }
+
   render() {
     const { posts , dispatch } = this.props;
     const actions = bindActionCreators(postsActions, dispatch);

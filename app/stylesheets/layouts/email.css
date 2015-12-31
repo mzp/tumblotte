@@ -282,9 +282,11 @@ a {
 }
 #editor > .nav button {
   margin-top: 10px;
+  margin-right: 10px;
 }
 
 .nav {
   padding: 0 1em;
   background: rgb(37, 42, 58);
 }
+
