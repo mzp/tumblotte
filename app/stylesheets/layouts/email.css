@@ -267,6 +267,8 @@ a {
 #preview {
   border-left: 1px solid #ddd;
   margin-left:-1px;
+  overflow: scroll;
+  height: 100vh;
 }
 #preview > * {
   margin: 10px
