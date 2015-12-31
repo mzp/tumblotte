@@ -1,25 +1,30 @@
 export default class Post {
-  constructor(id, content, tumblrId, selected = false) {
+  constructor({ id, content, tumblrId, dirty, selected = false}) {
     this.id = id;
     this.content = content || '';
     this.tumblrId = tumblrId || null;
+    this.dirty = dirty;
     this.selected = selected;
   }
 
   select() {
-    return new Post(this.id, this.content, this.tumblrId, true);
+    return new Post({ ...this, selected: true });
   }
 
   unselect() {
-    return new Post(this.id, this.content, this.tumblrId, false);
+    return new Post({ ...this, selected: false });
   }
 
   change(content) {
-    return new Post(this.id, content, this.tumblrId, this.selected);
+    return new Post({ ...this, dirty: true, content: content });
   }
 
   post(tumblrId) {
-    return new Post(this.id, this.content, tumblrId, this.selected);
+    return new Post({ ...this, dirty: false, tumblrId: tumblrId });
+  }
+
+  published() {
+    return new Post({ ...this, dirty: false })
   }
 
   get title() {

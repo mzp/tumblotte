@@ -13,7 +13,8 @@ function updateWith(state, post, f) {
 
 export default handleActions({
   '@@INIT': (state, action) =>
-    state.map((post, i) => new Post(i, post.content, post.tumblrId)),
+    state.map((post, i) =>
+      new Post({ id: i, selected: false, ...post })),
 
   CREATE: (state, action) => {
     return [new Post(state.length, 'new post'), ...state];
@@ -39,5 +40,8 @@ export default handleActions({
     return updateWith(state, post, (x) => x.post(response.id))
   },
 
-  EDIT: (state, action) => state
+  EDIT: (state, action) => {
+    const { post, response } = action.payload;
+    return updateWith(state, post, (x) => x.published())
+  },
 }, []);

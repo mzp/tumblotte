@@ -16,7 +16,7 @@ export default class Sidebar extends React.Component {
     const items =
       posts.map((post) => {
           const className =
-            `email-item ${post.selected ? 'email-item-selected' : ''}`;
+            `email-item ${post.selected ? 'email-item-selected' : ''} ${post.dirty ? 'email-item-dirty' : ''}`;
 
           return (
               <div key={post.id}

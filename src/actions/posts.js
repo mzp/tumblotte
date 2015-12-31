@@ -5,6 +5,7 @@ export default {
   create: createAction('CREATE'),
   select: createAction('SELECT'),
   change: createAction('CHANGE'),
+
   post: createAction('POST', (post) =>
     tumblr.create(post.title, post.body)
       .then(() => tumblr.fetchLast())
@@ -12,5 +13,5 @@ export default {
 
   edit: createAction('EDIT', (post) =>
     tumblr.edit(post.tumblrId, post.title, post.body)
-  )
+      .then((response) => Promise.resolve({ post })))
 };

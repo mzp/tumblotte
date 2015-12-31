@@ -156,6 +156,9 @@ a {
 
 .email-item-selected {
     background: #eee;
+}
+
+.email-item-dirty {
     border-left: 6px solid #1b98f8;
 }
 /* .email-item-unread { */
