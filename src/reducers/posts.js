@@ -1,5 +1,15 @@
 import { handleActions } from 'redux-actions';
 import Post from '../values/Post';
+import * as tumblr from '../gateway/tumblr';
+
+/*tumblr.create('hello', 'world')
+  .then(function() {
+    return tumblr.fetchLast();
+  })
+  .then(function(post) {
+    console.log(post);
+  });
+*/
 
 export default handleActions({
   '@@INIT': (state, action) =>
@@ -29,5 +39,9 @@ export default handleActions({
       }
     });
     return state;
+  },
+
+  POST: (state, action) => {
+    return state
   }
 }, []);
