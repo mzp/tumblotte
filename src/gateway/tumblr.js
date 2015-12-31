@@ -23,6 +23,7 @@ export function create(title, body) {
   return new Promise((resolve, reject) => {
     blog.post(opts, (error, response) => {
         if (error) {
+          console.log(error);
           reject(error);
         } else {
           resolve();
@@ -56,6 +57,7 @@ export function fetchLast() {
   return new Promise((resolve, reject) => {
     blog.text({ limit: 1 }, (error, response) => {
         if (error) {
+          console.log(error);
           reject(error);
         } else {
           resolve(response.posts[0]);

@@ -1,19 +1,19 @@
 import { handleActions } from 'redux-actions';
 import Post from '../values/Post';
-import * as tumblr from '../gateway/tumblr';
 
-/*tumblr.create('hello', 'world')
-  .then(function() {
-    return tumblr.fetchLast();
-  })
-  .then(function(post) {
-    console.log(post);
+function updateWith(state, post, f) {
+  return state.map((x) => {
+    if (x.id == post.id) {
+      return f(x);
+    } else {
+      return x
+    }
   });
-*/
+}
 
 export default handleActions({
   '@@INIT': (state, action) =>
-    state.map((post, i) => new Post(i, post.content)),
+    state.map((post, i) => new Post(i, post.content, post.tumblrId)),
 
   CREATE: (state, action) => {
     return [new Post(state.length, 'new post'), ...state];
@@ -31,17 +31,13 @@ export default handleActions({
 
   CHANGE: (state, action) => {
     const { post, value } = action.payload;
-    return state.map((x) => {
-      if (x.id == post.id) {
-        return x.change(value);
-      } else {
-        return x
-      }
-    });
-    return state;
+    return updateWith(state, post, (x) => x.change(value))
   },
 
   POST: (state, action) => {
-    return state
-  }
+    const { post, response } = action.payload;
+    return updateWith(state, post, (x) => x.post(response.id))
+  },
+
+  EDIT: (state, action) => state
 }, []);

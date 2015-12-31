@@ -6,8 +6,11 @@ export default {
   select: createAction('SELECT'),
   change: createAction('CHANGE'),
   post: createAction('POST', (post) =>
-      tumblr.create(post.title, post.body)
-        .then(() => tumblr.fetchLast())
-        .then((response) => Promise.resolve({ post, response}))
+    tumblr.create(post.title, post.body)
+      .then(() => tumblr.fetchLast())
+      .then((response) => Promise.resolve({ post, response}))),
+
+  edit: createAction('EDIT', (post) =>
+    tumblr.edit(post.tumblrId, post.title, post.body)
   )
 };
