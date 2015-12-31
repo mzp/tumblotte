@@ -6,6 +6,11 @@ export default class Editor extends React.Component {
     onChange({ post, value: e.target.value});
   }
 
+  remove() {
+    const { post, onRemove } = this.props;
+    onRemove(post);
+  }
+
   doPost() {
     const { post, onEdit, onPost } = this.props;
 
@@ -30,6 +35,7 @@ export default class Editor extends React.Component {
             <textarea value={content} onChange={::this.change} />
             <div className="nav">
               <button className="pure-button" onClick={::this.doPost}>{buttonTitle}</button>
+              <button className="pure-button" onClick={::this.remove}>Remove</button>
             </div>
           </div>
   }

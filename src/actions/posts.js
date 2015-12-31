@@ -5,6 +5,7 @@ export default {
   create: createAction('CREATE'),
   select: createAction('SELECT'),
   change: createAction('CHANGE'),
+  remove: createAction('REMOVE'),
 
   post: createAction('POST', (post) =>
     tumblr.create(post.title, post.body)

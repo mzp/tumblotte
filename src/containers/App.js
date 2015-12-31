@@ -18,6 +18,7 @@ class App extends React.Component {
         <div id="main" className="pure-g">
           <Editor post={post}
             onChange={actions.change}
+            onRemove={actions.remove}
             onPost={actions.post}
             onEdit={actions.edit} />
           <Preview post={post} />

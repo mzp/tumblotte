@@ -17,7 +17,18 @@ export default handleActions({
       new Post({ id: i, selected: false, ...post })),
 
   CREATE: (state, action) => {
-    return [new Post(state.length, 'new post'), ...state];
+    return [
+      new Post({
+        id: state.length,
+        content: 'new post\n',
+        dirty: true
+      }),
+    ...state
+    ];
+  },
+
+  REMOVE: (state, action) => {
+    return state.filter((x) => x.id != action.payload.id)
   },
 
   SELECT: (state, action) => {
