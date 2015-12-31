@@ -12,6 +12,9 @@ export default class Editor extends React.Component {
 
     return <div id="editor" className="pure-u-1-2 pure-form pure-group">
             <textarea value={content || ''} onChange={::this.change} />
+            <div className="nav">
+              <button className="pure-button">Post</button>
+            </div>
           </div>
 
   }

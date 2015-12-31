@@ -272,5 +272,16 @@ a {
   margin-left: 1px;
   margin-right: 10px;
   width: 100%;
-  height: 100vh;
+  height: 90vh;
+}
+#editor > .nav {
+  height: 10vh;
+}
+#editor > .nav button {
+  margin-top: 10px;
+}
+
+.nav {
+  padding: 0 1em;
+  background: rgb(37, 42, 58);
 }

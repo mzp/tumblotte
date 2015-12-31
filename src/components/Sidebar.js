@@ -22,6 +22,11 @@ export default class Sidebar extends React.Component {
               </div>);
       });
 
-    return <div id="list">{items}</div>;
+    return <div id="list">
+      <div className="nav">
+        <button className="primary-button pure-button">Compose</button>
+      </div>
+      {items}
+    </div>;
   }
 }
