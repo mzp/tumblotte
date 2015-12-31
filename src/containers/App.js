@@ -14,7 +14,7 @@ class App extends React.Component {
 
     return (
       <div id="layout">
-        <Sidebar posts={posts} onSelect={actions.select} />
+        <Sidebar posts={posts} onSelect={actions.select} onCreate={actions.create} />
         <div id="main" className="pure-g">
           <Editor post={post} onChange={actions.change} />
           <Preview post={post} />

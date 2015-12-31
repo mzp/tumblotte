@@ -6,6 +6,11 @@ export default class Sidebar extends React.Component {
     onSelect(post);
   }
 
+  create() {
+    const { onCreate } = this.props;
+    onCreate();
+  }
+
   render() {
     const { posts } = this.props;
     const items =
@@ -24,7 +29,7 @@ export default class Sidebar extends React.Component {
 
     return <div id="list">
       <div className="nav">
-        <button className="primary-button pure-button">Compose</button>
+        <button className="primary-button pure-button" onClick={::this.create}>Compose</button>
       </div>
       {items}
     </div>;

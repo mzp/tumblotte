@@ -1,7 +1,7 @@
 export default class Post {
   constructor(id, content, selected = false) {
     this.id = id;
-    this.content = content;
+    this.content = content || '';
     this.selected = selected;
   }
 

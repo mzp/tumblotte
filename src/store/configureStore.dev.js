@@ -1,11 +1,13 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { persistState } from 'redux-devtools';
+import { default as persistStorage } from 'redux-localstorage';
 import thunk from 'redux-thunk';
 import rootReducer from '../reducers';
 import DevTools from '../containers/DevTools';
 
 const finalCreateStore = compose(
   applyMiddleware(thunk),
+  persistStorage(['posts']),
   DevTools.instrument(),
   persistState(
     window.location.href.match(
