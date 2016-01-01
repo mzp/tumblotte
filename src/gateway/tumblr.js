@@ -1,4 +1,6 @@
 import { Blog } from 'tumblr';
+import { OAuth } from 'oauth';
+const shell = global.require('shell');
 
 // TODO: remove me
 const oauth = {
@@ -8,8 +10,31 @@ const oauth = {
   token_secret: 'Ssjdv04R1bmvdhpXvMZ1sN3AFSkQkAWdidDw4gf45UJQK6Q92u'
 };
 
+//OAuth用オブジェクト
+const consumer = new OAuth(
+  "https://www.tumblr.com/oauth/request_token",
+  "https://www.tumblr.com/oauth/access_token",
+  oauth.consumer_key,
+  oauth.consumer_secret,
+  "1.0A",
+  "https://example.com",
+  "HMAC-SHA1"
+);
+
 // TODO: custom me
 const blog = new Blog('mzp-text.tumblr.com', oauth);
+
+export function getRequestToken() {
+  return new Promise((resolve, reject) => {
+    consumer.getOAuthRequestToken((error, oauthToken, oauthTokenSecret)=> {
+      if (error) {
+        reject(error);
+      } else {
+        resolve("https://www.tumblr.com/oauth/authorize?oauth_token=" + oauthToken);
+      }
+    });
+  });
+}
 
 export function create(title, body) {
   const opts = {

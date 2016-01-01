@@ -34,6 +34,7 @@
     "font-awesome": "^4.5.0",
     "lodash.max": "^3.4.0",
     "marked": "^0.3.5",
+    "oauth": "^0.9.14",
     "purecss": "^0.6.0",
     "react": "^0.14.5",
     "react-dom": "^0.14.5",

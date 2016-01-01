@@ -2,9 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import postsActions from '../actions/posts';
+import authenticateActions from '../actions/authenticate';
 import Sidebar from '../components/Sidebar';
 import Editor from '../components/Editor';
 import Preview from '../components/Preview';
+import Login from '../components/Login';
 import menu from '../electron/MainMenu';
 
 class App extends React.Component {
@@ -14,8 +16,8 @@ class App extends React.Component {
     menu(actions, store);
   }
 
-  render() {
-    const { posts , dispatch } = this.props;
+  editor() {
+    const { posts, dispatch } = this.props;
     const actions = bindActionCreators(postsActions, dispatch);
     const post = posts.find((post) => post.selected);
 
@@ -33,6 +35,19 @@ class App extends React.Component {
           <Preview post={post} />
         </div>
       </div>);
+  }
+
+  login() {
+    const { authenticate, dispatch } = this.props;
+    const actions = bindActionCreators(authenticateActions, dispatch);
+    return (
+      <Login authenticate={authenticate}
+        getRequestToken={actions.getRequestToken} />);
+  }
+
+  render() {
+    const { authenticate } = this.props;
+    return authenticate.accessToken ? this.editor() : this.login();
   }
 }
 
