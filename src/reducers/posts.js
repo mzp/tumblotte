@@ -15,7 +15,7 @@ function updateWith(state, post, f) {
 export default handleActions({
   '@@INIT': (state, action) =>
     state.map((post, i) =>
-      new Post({ id: i, selected: false, ...post })),
+      new Post({ ...post, id: i, selected: false })),
 
   CREATE: (state, action) => {
     const max_id = max(state, (post) => post.id) || { id: 0 };
@@ -23,7 +23,7 @@ export default handleActions({
     return [
       new Post({
         id: ((max_id).id || 0) + 1,
-        content: 'new post\n',
+        content: 'new post\n\nwrite here...',
         dirty: true
       }),
       ...state

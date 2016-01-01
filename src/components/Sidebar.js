@@ -14,11 +14,14 @@ export default class Sidebar extends React.Component {
 
   remove() {
     const { posts, onRemove } = this.props;
-    posts.forEach((post) => {
-      if(post.selected) {
-        onRemove(post);
-      }
-    });
+
+    if(confirm('(๑•﹏•)?')) {
+      posts.forEach((post) => {
+        if(post.selected) {
+          onRemove(post);
+        }
+      });
+    }
   }
 
   render() {
