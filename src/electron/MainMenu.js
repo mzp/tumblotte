@@ -11,7 +11,7 @@ function setMenu(template) {
   Menu.setApplicationMenu(menu);
 }
 
-export default function(actions) {
+export default function(actions, store) {
   const main = [
     { label: 'Quit', accelerator: 'Command+Q',
       click: () => { app.quit(); } }
@@ -19,7 +19,20 @@ export default function(actions) {
 
   const file = [
     { label: 'New', accelerator: 'Command+N',
-      click: () => { actions.create(); } }
+      click: () => { actions.create(); } },
+    { label: 'Post/Update', accelerator: 'Command+U',
+      click: () => {
+        const { posts } = store.getState();
+        posts.forEach((post) => {
+          if (post.selected) {
+            if (post.isPosted) {
+              actions.edit(post);
+            } else {
+              actions.post(post);
+            }
+          }
+        });
+      } }
   ];
 
   const develop = [

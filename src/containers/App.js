@@ -9,9 +9,9 @@ import menu from '../electron/MainMenu';
 
 class App extends React.Component {
   componentDidMount() {
-    const { dispatch } = this.props;
+    const { store, dispatch } = this.props;
     const actions = bindActionCreators(postsActions, dispatch);
-    menu(actions);
+    menu(actions, store);
   }
 
   render() {

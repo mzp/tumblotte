@@ -31,10 +31,7 @@ export default class Editor extends React.Component {
       return <div id="editor" className="pure-u-1-2 editor editor--unselect" />
     }
 
-    const content = post.content;
-    const buttonTitle = post.isPosted ? 'Update' : 'Create';
     var openButton = '';
-
     if(post.isPosted) {
       openButton = (
         <button className="secondary-button pure-button" onClick={::this.open}>
@@ -43,7 +40,9 @@ export default class Editor extends React.Component {
     }
 
     return <div id="editor" className="editor pure-u-1-2 pure-form">
-            <textarea className="editor__text" value={content} onChange={::this.change} />
+            <textarea className="editor__text"
+               value={post.content}
+               onChange={::this.change} />
             <div className="editor__nav">
               <button className="primary-button pure-button" onClick={::this.doPost}>
                 <FontAwesome name='rocket' />
