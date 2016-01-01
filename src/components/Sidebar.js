@@ -1,4 +1,5 @@
 import React from 'react';
+import FontAwesome from 'react-fontawesome';
 
 export default class Sidebar extends React.Component {
   select(post) {
@@ -9,6 +10,15 @@ export default class Sidebar extends React.Component {
   create() {
     const { onCreate } = this.props;
     onCreate();
+  }
+
+  remove() {
+    const { posts, onRemove } = this.props;
+    posts.forEach((post) => {
+      if(post.selected) {
+        onRemove(post);
+      }
+    });
   }
 
   render() {
@@ -31,7 +41,14 @@ export default class Sidebar extends React.Component {
 
     return <div id="list" className="sidebar">
       <div className="sidebar__nav">
-        <button className="primary-button pure-button" onClick={::this.create}>Compose</button>
+        <button className="primary-button pure-button"
+          onClick={::this.create}>
+          <FontAwesome name='file-o' />
+        </button>
+        <button className="secondary-button pure-button"
+          onClick={::this.remove}>
+          <FontAwesome name='trash-o' />
+        </button>
       </div>
       {items}
     </div>;

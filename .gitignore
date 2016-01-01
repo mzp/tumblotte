@@ -1,4 +1,5 @@
 node_modules/
 app/bundle.js
-app/main.css
+app/css
+app/fonts
 package/

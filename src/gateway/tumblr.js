@@ -65,3 +65,7 @@ export function fetchLast() {
     });
   });
 }
+
+export function url(tumblrId) {
+  return `https://mzp-text.tumblr.com/post/${tumblrId}`
+}

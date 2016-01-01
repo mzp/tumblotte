@@ -1,7 +1,7 @@
 {
   "name": "tumblr-editor",
   "version": "1.0.0",
-  "description": "",
+  "description": "tumblr editor",
   "main": "app/index.js",
   "scripts": {
     "gulp": "gulp",
@@ -22,6 +22,7 @@
     "gulp-sourcemap": "^1.0.1",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-stylus": "^2.2.0",
+    "node-font-awesome": "^1.0.2",
     "preprocessify": "0.0.6",
     "redux-devtools": "^3.0.1",
     "redux-devtools-dock-monitor": "^1.0.1",
@@ -30,6 +31,7 @@
   },
   "dependencies": {
     "electron-prebuilt": "^0.36.2",
+    "lodash.max": "^3.4.0",
     "marked": "^0.3.5",
     "react": "^0.14.5",
     "react-dom": "^0.14.5",

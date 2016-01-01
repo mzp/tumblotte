@@ -21,11 +21,13 @@ class App extends React.Component {
 
     return (
       <div id="layout">
-        <Sidebar posts={posts} onSelect={actions.select} onCreate={actions.create} />
+        <Sidebar posts={posts}
+          onRemove={actions.remove}
+          onSelect={actions.select}
+          onCreate={actions.create} />
         <div id="main" className="pure-g">
           <Editor post={post}
             onChange={actions.change}
-            onRemove={actions.remove}
             onPost={actions.post}
             onEdit={actions.edit} />
           <Preview post={post} />

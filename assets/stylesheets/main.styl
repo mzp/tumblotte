@@ -1,4 +1,5 @@
 @import 'pure.css'
+@import 'font-awesome.css'
 
 $black = rgb(37, 42, 58)
 $sidebar = 200px
@@ -24,11 +25,9 @@ round-button()
 
 .secondary-button
   round-button()
-  background: #fff
-  border: 1px solid #ddd
   color: #666
-  padding: 0.5em 2em
-  font-size: 80%
+  background: #fff
+  margin: 1em 5px
 
 // sidebar
 .sidebar
@@ -58,6 +57,10 @@ round-button()
 
 // editor
 .editor
+  textarea
+    border-radius: 0
+    resize: none
+
   &__text
     margin-left: 1px
     margin-right: 10px
@@ -72,7 +75,6 @@ round-button()
     button
       round-button()
       margin-top: 10px
-      margin-right: 10px
 
 // preview
 .preview

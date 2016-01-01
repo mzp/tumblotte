@@ -1,5 +1,6 @@
 import { handleActions } from 'redux-actions';
 import Post from '../values/Post';
+import max from 'lodash.max';
 
 function updateWith(state, post, f) {
   return state.map((x) => {
@@ -17,13 +18,15 @@ export default handleActions({
       new Post({ id: i, selected: false, ...post })),
 
   CREATE: (state, action) => {
+    const max_id = max(state, (post) => post.id) || { id: 0 };
+
     return [
       new Post({
-        id: state.length,
+        id: ((max_id).id || 0) + 1,
         content: 'new post\n',
         dirty: true
       }),
-    ...state
+      ...state
     ];
   },
 

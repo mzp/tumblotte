@@ -1,4 +1,7 @@
 import React from 'react';
+import FontAwesome from 'react-fontawesome';
+import { url } from '../gateway/tumblr';
+const shell = global.require('shell');
 
 export default class Editor extends React.Component {
   change(e) {
@@ -6,9 +9,9 @@ export default class Editor extends React.Component {
     onChange({ post, value: e.target.value});
   }
 
-  remove() {
-    const { post, onRemove } = this.props;
-    onRemove(post);
+  open() {
+    const { post } = this.props;
+    shell.openExternal(url(post.tumblrId));
   }
 
   doPost() {
@@ -30,12 +33,22 @@ export default class Editor extends React.Component {
 
     const content = post.content;
     const buttonTitle = post.isPosted ? 'Update' : 'Create';
+    var openButton = '';
 
-    return <div id="editor" className="editor pure-u-1-2 pure-form pure-group">
+    if(post.isPosted) {
+      openButton = (
+        <button className="secondary-button pure-button" onClick={::this.open}>
+          <FontAwesome name='external-link' />
+        </button>);
+    }
+
+    return <div id="editor" className="editor pure-u-1-2 pure-form">
             <textarea className="editor__text" value={content} onChange={::this.change} />
             <div className="editor__nav">
-              <button className="pure-button" onClick={::this.doPost}>{buttonTitle}</button>
-              <button className="pure-button" onClick={::this.remove}>Remove</button>
+              <button className="primary-button pure-button" onClick={::this.doPost}>
+                <FontAwesome name='rocket' />
+              </button>
+              {openButton}
             </div>
           </div>
   }
