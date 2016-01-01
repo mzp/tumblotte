@@ -58,4 +58,23 @@ export default handleActions({
     const { post, response } = action.payload;
     return updateWith(state, post, (x) => x.published())
   },
+
+  FETCH: (state, action) => {
+    const newPosts = action.payload.map((response) => {
+      const { id, title, body } = response;
+      return new Post({
+        id,
+        tumblrId: id,
+        content: title + "\n\n" + body.trim(),
+        dirty: false
+      });
+    });
+
+    const remainPosts = state.filter((post) => {
+      return !action.payload.find((response) =>
+          post.tumblrId === response.id);
+    });
+
+    return [...newPosts, ...remainPosts];
+  }
 }, []);

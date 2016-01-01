@@ -14,5 +14,8 @@ export default {
 
   edit: createAction('EDIT', (post) =>
     tumblr.edit(post.tumblrId, post.title, post.body)
-      .then((response) => Promise.resolve({ post })))
+      .then((response) => Promise.resolve({ post }))),
+
+  fetch: createAction('FETCH', (count = 10) =>
+    tumblr.fetch(count))
 };

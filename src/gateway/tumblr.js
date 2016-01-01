@@ -66,6 +66,18 @@ export function fetchLast() {
   });
 }
 
+export function fetch(limit) {
+  return new Promise((resolve, reject) => {
+    blog.text({ filter: 'raw', limit }, (error, response) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(response.posts);
+      }
+    });
+  });
+}
+
 export function url(tumblrId) {
   return `https://mzp-text.tumblr.com/post/${tumblrId}`
 }

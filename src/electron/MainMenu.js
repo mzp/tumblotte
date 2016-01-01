@@ -20,6 +20,8 @@ export default function(actions, store) {
   const file = [
     { label: 'New', accelerator: 'Command+N',
       click: () => { actions.create(); } },
+    { label: 'Fetch',
+      click: () => { actions.fetch(); } },
     { label: 'Post/Update', accelerator: 'Command+U',
       click: () => {
         const { posts } = store.getState();
