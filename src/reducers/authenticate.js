@@ -14,5 +14,7 @@ export default handleActions({
   ACCESS_TOKEN: (state, action) => {
     const { accessToken, accessTokenSecret } = action.payload;
     return { ...state, accessToken, accessTokenSecret }
-  }
+  },
+
+  LOGOUT: (state, action) => { return {} },
 }, { });

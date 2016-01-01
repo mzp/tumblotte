@@ -12,8 +12,10 @@ import menu from '../electron/MainMenu';
 class App extends React.Component {
   componentDidMount() {
     const { store, dispatch } = this.props;
-    const actions = bindActionCreators(postsActions, dispatch);
-    menu(actions, store);
+    menu({
+      authenticate: bindActionCreators(authenticateActions, dispatch),
+      posts: bindActionCreators(postsActions, dispatch),
+    }, store);
   }
 
   editor() {

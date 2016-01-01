@@ -13,24 +13,26 @@ function setMenu(template) {
 
 export default function(actions, store) {
   const main = [
+    { label: 'Logout',
+      click: () => { actions.authenticate.logout(); } },
     { label: 'Quit', accelerator: 'Command+Q',
       click: () => { app.quit(); } }
   ];
 
   const file = [
     { label: 'New', accelerator: 'Command+N',
-      click: () => { actions.create(); } },
+      click: () => { actions.posts.create(); } },
     { label: 'Fetch',
-      click: () => { actions.fetch(); } },
+      click: () => { actions.posts.fetch(); } },
     { label: 'Post/Update', accelerator: 'Command+U',
       click: () => {
         const { posts } = store.getState();
         posts.forEach((post) => {
           if (post.selected) {
             if (post.isPosted) {
-              actions.edit(post);
+              actions.posts.edit(post);
             } else {
-              actions.post(post);
+              actions.posts.post(post);
             }
           }
         });

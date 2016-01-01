@@ -3,5 +3,6 @@ import * as tumblr from '../gateway/tumblr';
 
 export default {
   authorize: createAction('AUTHORIZE', tumblr.getRequestToken),
-  getAccessToken: createAction('ACCESS_TOKEN', tumblr.getAccessToken)
+  getAccessToken: createAction('ACCESS_TOKEN', tumblr.getAccessToken),
+  logout: createAction('LOGOUT')
 };
