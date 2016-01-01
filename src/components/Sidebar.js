@@ -16,19 +16,21 @@ export default class Sidebar extends React.Component {
     const items =
       posts.map((post) => {
           const className =
-            `email-item ${post.selected ? 'email-item-selected' : ''} ${post.dirty ? 'email-item-dirty' : ''}`;
+            `sidebar__item
+            ${post.selected ? 'sidebar__item--selected' : ''}
+            ${post.dirty ? 'sidebar__item--dirty' : ''}`;
 
           return (
               <div key={post.id}
                 className={className}
                 onClick={::this.select.bind(this, post)}>
-                <h4>{post.title}</h4>
-                <p className='email-desc'>{post.body.substring(0, 20)}</p>
+                <h4 className="sidebar__item-title">{post.title}</h4>
+                <p className='sidebar__item-body'>{post.body.substring(0, 20)}</p>
               </div>);
       });
 
-    return <div id="list">
-      <div className="nav">
+    return <div id="list" className="sidebar">
+      <div className="sidebar__nav">
         <button className="primary-button pure-button" onClick={::this.create}>Compose</button>
       </div>
       {items}

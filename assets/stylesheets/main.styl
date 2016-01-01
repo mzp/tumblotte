@@ -1,0 +1,132 @@
+@import 'pure.css'
+
+$black = rgb(37, 42, 58)
+$sidebar = 200px
+
+body
+  color: #333
+
+a
+  text-decoration: none
+  color: #1b98f8
+
+round-button()
+  -webkit-box-shadow: none
+  -moz-box-shadow: none
+  box-shadow: none
+  border-radius: 20px
+
+.primary-button
+  round-button()
+  color: #fff
+  background: #1b98f8
+  margin: 1em 0
+
+.secondary-button
+  round-button()
+  background: #fff
+  border: 1px solid #ddd
+  color: #666
+  padding: 0.5em 2em
+  font-size: 80%
+
+// sidebar
+.sidebar
+  &__nav
+    background: $black
+    padding: 0 1em
+
+  &__item
+    padding: 10px 5px
+    border-bottom: 1px solid #ddd
+    border-left: 6px solid transparent
+
+    &--selected
+      background: #eee
+
+    &--dirty
+      border-left: 6px solid #1b98f8
+
+  &__item-title
+    margin-top: 0
+    margin-bottom: 10px
+
+  &__item-body
+    margin-top: 10px
+    margin-bottom: 0
+    font-size: 12px
+
+// editor
+.editor
+  &__text
+    margin-left: 1px
+    margin-right: 10px
+    width: 100%
+    height: 90vh
+
+  &__nav
+    padding: 0 1em
+    background: $black
+    height: 10vh
+
+    button
+      round-button()
+      margin-top: 10px
+      margin-right: 10px
+
+// preview
+.preview
+  border-left: 1px solid #ddd
+  margin-left:-1px
+  overflow: scroll
+  height: 100vh
+
+  > *
+    margin: 10px
+
+// -- LAYOUT STYLES --
+#layout, #list, #main
+  margin: 0
+  padding: 0
+
+// tablet layout
+@media (min-width: 40em)
+  #layout
+    padding-left: $sidebar
+    position: relative
+
+  #list
+    position: fixed
+    top: 0
+    bottom: 0
+    overflow: auto
+    margin-left: - $sidebar
+    width: 100%
+    height: 33%
+    border-bottom: 1px solid #ddd
+
+  #main
+    position: fixed
+    top: 33%
+    right: 0
+    bottom: 0
+    left: $sidebar
+    overflow: auto
+    width: auto
+
+// desktop layout
+@media (min-width: 60em)
+  #list
+    margin-left: - $sidebar
+    width: $sidebar
+    height: 100%
+    border-right: 1px solid #ddd
+
+  #main
+    position: fixed
+    margin: 0
+    padding: 0
+    top: 0
+    bottom: 0
+    overflow: auto
+

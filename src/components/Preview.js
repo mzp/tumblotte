@@ -16,9 +16,9 @@ export default class Preview extends React.Component {
   render() {
     const { post } = this.props;
 
-    return <div id="preview" className="pure-u-1-2">
-      <h1>{post && post.title}</h1>
-      <div dangerouslySetInnerHTML={this.rawMarkup()} />
+    return <div id="preview" className="pure-u-1-2 preview">
+      <h1 className="preview__title">{post && post.title}</h1>
+      <div className="preview__body" dangerouslySetInnerHTML={this.rawMarkup()} />
     </div>
   }
 }

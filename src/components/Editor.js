@@ -25,15 +25,15 @@ export default class Editor extends React.Component {
     const { post } = this.props;
 
     if(!post) {
-      return <div id="editor" className="pure-u-1-2" />
+      return <div id="editor" className="pure-u-1-2 editor editor--unselect" />
     }
 
     const content = post.content;
     const buttonTitle = post.isPosted ? 'Update' : 'Create';
 
-    return <div id="editor" className="pure-u-1-2 pure-form pure-group">
-            <textarea value={content} onChange={::this.change} />
-            <div className="nav">
+    return <div id="editor" className="editor pure-u-1-2 pure-form pure-group">
+            <textarea className="editor__text" value={content} onChange={::this.change} />
+            <div className="editor__nav">
               <button className="pure-button" onClick={::this.doPost}>{buttonTitle}</button>
               <button className="pure-button" onClick={::this.remove}>Remove</button>
             </div>
