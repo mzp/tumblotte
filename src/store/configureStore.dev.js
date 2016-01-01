@@ -7,7 +7,7 @@ import DevTools from '../containers/DevTools';
 
 const finalCreateStore = compose(
   applyMiddleware(promiseMiddleware),
-  persistStorage(['posts']),
+  persistStorage(['authenticate', 'posts']),
   DevTools.instrument(),
   persistState(
     window.location.href.match(

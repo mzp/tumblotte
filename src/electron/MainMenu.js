@@ -37,6 +37,15 @@ export default function(actions, store) {
       } }
   ];
 
+  const edit  = [
+    { label: "Undo", accelerator: "Command+Z", selector: "undo:" },
+    { label: "Redo", accelerator: "Shift+Command+Z", selector: "redo:" },
+    { type: "separator" },
+    { label: "Cut", accelerator: "Command+X", selector: "cut:" },
+    { label: "Copy", accelerator: "Command+C", selector: "copy:" },
+    { label: "Paste", accelerator: "Command+V", selector: "paste:" }
+  ];
+
   const develop = [
     { label: 'Reload', accelerator: 'Command+R',
       click: () => { mainWindow.restart(); } },
@@ -50,6 +59,7 @@ export default function(actions, store) {
   setMenu([
     { label: 'Tumblr', submenu: main },
     { label: 'File', submenu: file },
+    { label: 'Edit', submenu: edit },
     { label: 'Develop', submenu: develop }
   ]);
 }

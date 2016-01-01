@@ -42,7 +42,8 @@ class App extends React.Component {
     const actions = bindActionCreators(authenticateActions, dispatch);
     return (
       <Login authenticate={authenticate}
-        getRequestToken={actions.getRequestToken} />);
+        authorize={actions.authorize}
+        getAccessToken={actions.getAccessToken} />);
   }
 
   render() {

@@ -26,13 +26,30 @@ const blog = new Blog('mzp-text.tumblr.com', oauth);
 
 export function getRequestToken() {
   return new Promise((resolve, reject) => {
-    consumer.getOAuthRequestToken((error, oauthToken, oauthTokenSecret)=> {
+    consumer.getOAuthRequestToken((error, requestToken, requestTokenSecret)=> {
       if (error) {
         reject(error);
       } else {
-        resolve("https://www.tumblr.com/oauth/authorize?oauth_token=" + oauthToken);
+        resolve({
+          authorizeUrl: "https://www.tumblr.com/oauth/authorize?oauth_token=" + requestToken,
+          requestToken,
+          requestTokenSecret
+        });
       }
     });
+  });
+}
+
+export function getAccessToken(requestToken, requestTokenSecret, oauthVerifier) {
+  return new Promise((resolve, reject) => {
+    consumer.getOAuthAccessToken(requestToken,
+      requestTokenSecret, oauthVerifier, (error, accessToken, accessTokenSecret) => {
+        if(error) {
+          reject(error);
+        } else {
+          resolve({ accessToken, accessTokenSecret });
+        }
+      });
   });
 }
 

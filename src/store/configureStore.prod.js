@@ -5,7 +5,7 @@ import rootReducer from '../reducers';
 
 const finalCreateStore = compose(
   applyMiddleware(promiseMiddleware),
-  persistStorage(['posts'])
+  persistStorage(['authenticate', 'posts'])
 )(createStore);
 
 export default function configureStore(initialState) {
