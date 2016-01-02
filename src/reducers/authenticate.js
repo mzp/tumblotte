@@ -1,20 +1,20 @@
 import { handleActions } from 'redux-actions';
+import Authenticate from '../values/Authenticate';
 
 export default handleActions({
   '@@INIT': (state, action) => {
-    const { accessToken, accessTokenSecret } = state;
-    return { accessToken, accessTokenSecret }
+    return new Authenticate(state);
   },
 
   AUTHORIZE: (state, action) => {
     const { authorizeUrl, requestToken, requestTokenSecret } = action.payload;
-    return { ...state, authorizeUrl, requestToken, requestTokenSecret };
+    return state.authorize(authorizeUrl, requestToken, requestTokenSecret);
   },
 
   ACCESS_TOKEN: (state, action) => {
     const { accessToken, accessTokenSecret } = action.payload;
-    return { ...state, accessToken, accessTokenSecret }
+    return state.verify(accessToken, accessTokenSecret);
   },
 
-  LOGOUT: (state, action) => { return {} },
+  LOGOUT: (state, action) => { return state.logout(); },
 }, { });

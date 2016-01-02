@@ -12,19 +12,22 @@ function setMenu(template) {
 }
 
 export default function(actions, store, tumblr) {
+  const authenticated = store.getState().authenticate.isAuthenticated;
+
   const main = [
-    { label: 'Logout',
+    { label: 'Logout', enabled: authenticated,
       click: () => { actions.authenticate.logout(); } },
+    { type: "separator" },
     { label: 'Quit', accelerator: 'Command+Q',
       click: () => { app.quit(); } }
   ];
 
   const file = [
-    { label: 'New', accelerator: 'Command+N',
+    { label: 'New', accelerator: 'Command+N', enabled: authenticated,
       click: () => { actions.posts.create(); } },
-    { label: 'Fetch',
+    { label: 'Fetch', enabled: authenticated,
       click: () => { actions.posts.fetch(tumblr); } },
-    { label: 'Post/Update', accelerator: 'Command+U',
+    { label: 'Post/Update', accelerator: 'Command+U', enabled: authenticated,
       click: () => {
         const { posts } = store.getState();
         posts.forEach((post) => {

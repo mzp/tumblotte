@@ -1,3 +1,4 @@
+import FontAwesome from 'react-fontawesome';
 import React from 'react';
 
 export default class Login extends React.Component {
@@ -13,9 +14,12 @@ export default class Login extends React.Component {
   }
 
   componentDidUpdate() {
-    const webview = document.getElementById("tumblr-auth");
+    const webview = document.getElementById('tumblr-auth');
 
     if(webview) {
+      // メモリリークするかも..。
+      // どこかでremoveEventListerしたいけど、thisをbindしているので、
+      // そんなに簡単じゃない。
       webview.addEventListener('did-get-redirect-request', ::this.handle);
       webview.addEventListener('will-navigate', ::this.handle);
     }
@@ -25,9 +29,14 @@ export default class Login extends React.Component {
     const { authorize, authenticate: { authorizeUrl }} = this.props;
 
     if (authorizeUrl) {
-      return <div id="login"><webview id="tumblr-auth" src={authorizeUrl} nodeintegration></webview></div>
+      return <div id='login' className='login'><webview id='tumblr-auth' src={authorizeUrl} nodeintegration></webview></div>
     } else {
-      return <div id="login"><button onClick={authorize}>login</button></div>;
+      return (
+        <div id='login' className='login'>
+          <button className='pure-button primary-button login__button' onClick={authorize}>
+            <FontAwesome name='sign-in' size='4x' />
+          </button>
+        </div>);
     }
   }
 }

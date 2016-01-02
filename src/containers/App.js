@@ -11,12 +11,20 @@ import menu from '../electron/MainMenu';
 import Tumblr from '../gateway/tumblr';
 
 class App extends React.Component {
-  componentDidMount() {
+  updateMenu() {
     const { store, dispatch } = this.props;
     menu({
       authenticate: bindActionCreators(authenticateActions, dispatch),
       posts: bindActionCreators(postsActions, dispatch),
     }, store, this.createTumblr());
+  }
+
+  componentDidMount() {
+    this.updateMenu();
+  }
+
+  componentWillUpdate() {
+    this.updateMenu();
   }
 
   createTumblr() {
@@ -57,7 +65,7 @@ class App extends React.Component {
 
   render() {
     const { authenticate } = this.props;
-    return authenticate.accessToken ? this.editor() : this.login();
+    return authenticate.isAuthenticated ? this.editor() : this.login();
   }
 }
 
