@@ -1,4 +1,4 @@
-import { Blog } from 'tumblr';
+import { Blog as TumblrBlog, User as TumblrUser } from 'tumblr';
 import { OAuth } from 'oauth';
 
 const oauth = {
@@ -45,10 +45,35 @@ export default class Tumblr {
           });
     });
   }
+}
 
+export class User {
+  constructor(accessToken, accessTokenSecret) {
+    this.user = new TumblrUser({
+      consumer_key: oauth.consumer_key,
+      consumer_secret: oauth.consumer_secret,
+      token: accessToken,
+      token_secret: accessTokenSecret
+    });
+  }
+
+  blogs() {
+    return new Promise((resolve, reject) => {
+      this.user.info((error, response) => {
+        if(error) {
+          reject(error);
+        } else {
+          resolve(response.user.blogs);
+        }
+      });
+    });
+  }
+}
+
+export class Blog {
   constructor(host, accessToken, accessTokenSecret) {
     this.host = host;
-    this.blog = new Blog('mzp-text.tumblr.com', {
+    this.blog = new TumblrBlog('mzp-text.tumblr.com', {
       consumer_key: oauth.consumer_key,
       consumer_secret: oauth.consumer_secret,
       token: accessToken,
@@ -114,4 +139,4 @@ export default class Tumblr {
   url(tumblrId) {
     return `https://mzp-text.tumblr.com/post/${tumblrId}`
   }
-};
+}

@@ -8,7 +8,7 @@ import Editor from '../components/Editor';
 import Preview from '../components/Preview';
 import Login from '../components/Login';
 import menu from '../electron/MainMenu';
-import Tumblr from '../gateway/tumblr';
+import { Blog, User } from '../gateway/tumblr';
 
 class App extends React.Component {
   updateMenu() {
@@ -29,7 +29,7 @@ class App extends React.Component {
 
   createTumblr() {
     const { authenticate } = this.props;
-    return new Tumblr('mzp-text.tumblr.com',
+    return new Blog('mzp-text.tumblr.com',
       authenticate.accessToken,
       authenticate.accessTokenSecret);
   }
