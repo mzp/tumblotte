@@ -1,5 +1,4 @@
 import React from 'react';
-import { getRequestToken } from '../gateway/tumblr';
 
 export default class Login extends React.Component {
   handle(e) {

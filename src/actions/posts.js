@@ -1,5 +1,4 @@
 import { createAction } from 'redux-actions';
-import * as tumblr from '../gateway/tumblr';
 
 export default {
   create: createAction('CREATE'),
@@ -7,15 +6,25 @@ export default {
   change: createAction('CHANGE'),
   remove: createAction('REMOVE'),
 
-  post: createAction('POST', (post) =>
-    tumblr.create(post.title, post.body)
-      .then(() => tumblr.fetchLast())
-      .then((response) => Promise.resolve({ post, response}))),
+  post: (tumblr, post) => {
+    if(post.tumblrId) {
+      const edit = (tumblr, post) =>
+        tumblr.edit(post.tumblrId, post.title, post.body)
+          .then((response) => Promise.resolve({ post, response }));
+      const action = createAction('EDIT', edit);
 
-  edit: createAction('EDIT', (post) =>
-    tumblr.edit(post.tumblrId, post.title, post.body)
-      .then((response) => Promise.resolve({ post }))),
+      return action(tumblr, post);
+    } else {
+      const create = (tumblr, post) =>
+        tumblr.create(post.title, post.body)
+          .then(() => tumblr.fetchLast())
+          .then((response) => Promise.resolve({ post, response}));
+      const action = createAction('POST', create);
 
-  fetch: createAction('FETCH', (count = 10) =>
+      return action(tumblr, post);
+    }
+  },
+
+  fetch: createAction('FETCH', (tumblr, count = 10) =>
     tumblr.fetch(count))
 };

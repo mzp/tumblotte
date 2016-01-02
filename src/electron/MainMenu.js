@@ -11,7 +11,7 @@ function setMenu(template) {
   Menu.setApplicationMenu(menu);
 }
 
-export default function(actions, store) {
+export default function(actions, store, tumblr) {
   const main = [
     { label: 'Logout',
       click: () => { actions.authenticate.logout(); } },
@@ -23,17 +23,13 @@ export default function(actions, store) {
     { label: 'New', accelerator: 'Command+N',
       click: () => { actions.posts.create(); } },
     { label: 'Fetch',
-      click: () => { actions.posts.fetch(); } },
+      click: () => { actions.posts.fetch(tumblr); } },
     { label: 'Post/Update', accelerator: 'Command+U',
       click: () => {
         const { posts } = store.getState();
         posts.forEach((post) => {
           if (post.selected) {
-            if (post.isPosted) {
-              actions.posts.edit(post);
-            } else {
-              actions.posts.post(post);
-            }
+            actions.posts.post(tumblr, post);
           }
         });
       } }

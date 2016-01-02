@@ -8,6 +8,7 @@ import Editor from '../components/Editor';
 import Preview from '../components/Preview';
 import Login from '../components/Login';
 import menu from '../electron/MainMenu';
+import Tumblr from '../gateway/tumblr';
 
 class App extends React.Component {
   componentDidMount() {
@@ -15,25 +16,31 @@ class App extends React.Component {
     menu({
       authenticate: bindActionCreators(authenticateActions, dispatch),
       posts: bindActionCreators(postsActions, dispatch),
-    }, store);
+    }, store, this.createTumblr());
+  }
+
+  createTumblr() {
+    const { authenticate } = this.props;
+    return new Tumblr('mzp-text.tumblr.com',
+      authenticate.accessToken,
+      authenticate.accessTokenSecret);
   }
 
   editor() {
-    const { posts, dispatch } = this.props;
+    const { authenticate, posts, dispatch } = this.props;
     const actions = bindActionCreators(postsActions, dispatch);
     const post = posts.find((post) => post.selected);
-
+    const tumblr = this.createTumblr();
     return (
       <div id="layout">
-        <Sidebar posts={posts}
+        <Sidebar posts={posts} tumblr={tumblr}
           onRemove={actions.remove}
           onSelect={actions.select}
           onCreate={actions.create} />
         <div id="main" className="pure-g">
-          <Editor post={post}
+          <Editor post={post} tumblr={tumblr}
             onChange={actions.change}
-            onPost={actions.post}
-            onEdit={actions.edit} />
+            onPost={actions.post} />
           <Preview post={post} />
         </div>
       </div>);

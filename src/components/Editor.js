@@ -1,6 +1,5 @@
 import React from 'react';
 import FontAwesome from 'react-fontawesome';
-import { url } from '../gateway/tumblr';
 const shell = global.require('shell');
 
 export default class Editor extends React.Component {
@@ -10,18 +9,13 @@ export default class Editor extends React.Component {
   }
 
   open() {
-    const { post } = this.props;
-    shell.openExternal(url(post.tumblrId));
+    const { tumblr, post } = this.props;
+    shell.openExternal(tumblr.url(post.tumblrId));
   }
 
   doPost() {
-    const { post, onEdit, onPost } = this.props;
-
-    if(post.isPosted) {
-      onEdit(post);
-    } else {
-      onPost(post);
-    }
+    const { tumblr, post, onPost } = this.props;
+    onPost(tumblr, post);
   }
 
   render() {
