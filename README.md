@@ -1,4 +1,4 @@
-# Tumblotte☄️
+# Tumblotte 💫
 
 ![screenshot](https://raw.githubusercontent.com/mzp/tumblotte/master/docs/screenshot.png)
 
