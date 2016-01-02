@@ -21,13 +21,13 @@ round-button()
   round-button()
   color: #fff
   background: #1b98f8
-  margin: 1em 0
+  margin: 1em 2px
 
 .secondary-button
   round-button()
   color: #666
   background: #fff
-  margin: 1em 5px
+  margin: 1em 2px
 
 .login
   text-align: center
@@ -48,6 +48,10 @@ round-button()
 
     button
       margin-top: 10px
+
+  &__blogs
+    select
+      width: 100%
 
   &__items
     position: absolute
@@ -77,6 +81,8 @@ round-button()
 
 // editor
 .editor
+  position: relative
+
   textarea
     border-radius: 0
     resize: none
@@ -85,12 +91,18 @@ round-button()
     margin-left: 1px
     margin-right: 10px
     width: 100%
-    height: 90vh
+    position: absolute
+    top: 0
+    bottom: 55px
 
   &__nav
     padding: 0 1em
     background: $black
-    height: 10vh
+    position: absolute
+    height: 55px
+    left: 0
+    right: 0
+    bottom: 0
 
     button
       round-button()
