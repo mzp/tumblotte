@@ -53,7 +53,9 @@ export default class Sidebar extends React.Component {
           <FontAwesome name='trash-o' />
         </button>
       </div>
-      {items}
+      <div className='sidebar__items'>
+        {items}
+      </div>
     </div>;
   }
 }
