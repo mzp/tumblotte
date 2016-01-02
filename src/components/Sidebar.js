@@ -29,6 +29,11 @@ export default class Sidebar extends React.Component {
     }
   }
 
+  fetch() {
+    const { tumblr, onFetch } = this.props;
+    onFetch(tumblr);
+  }
+
   makeItem(post) {
     const className =
       `sidebar__item
@@ -67,6 +72,10 @@ export default class Sidebar extends React.Component {
           <button className="secondary-button pure-button"
             onClick={::this.remove}>
             <FontAwesome name='trash-o' />
+          </button>
+          <button className="secondary-button pure-button"
+            onClick={::this.fetch}>
+            <FontAwesome name='refresh' />
           </button>
         </div>
       </div>

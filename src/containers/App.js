@@ -50,6 +50,7 @@ class App extends React.Component {
       <div id="layout">
         <Sidebar blogs={blogs} posts={posts} tumblr={tumblr}
           onSelectBlog={ba.select}
+          onFetch={actions.fetch}
           onRemove={actions.remove}
           onSelect={actions.select}
           onCreate={actions.create} />
