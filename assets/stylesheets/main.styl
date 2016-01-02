@@ -39,15 +39,20 @@ round-button()
 // sidebar
 .sidebar
   &__nav
+    position: absolute
+    height: 70px
+    left: 0
+    right: 0
     background: $black
-    padding: 0 1em
-    height: 10vh
+    padding: 10px
 
     button
       margin-top: 10px
 
   &__items
-    height: 90vh
+    position: absolute
+    top: 90px
+    bottom: 0
     overflow: scroll
 
   &__item

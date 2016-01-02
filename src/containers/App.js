@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import postsActions from '../actions/posts';
 import authenticateActions from '../actions/authenticate';
+import blogsActions from '../actions/blogs';
 import Sidebar from '../components/Sidebar';
 import Editor from '../components/Editor';
 import Preview from '../components/Preview';
@@ -20,6 +21,11 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    const { authenticate, dispatch } = this.props;
+    const actions = bindActionCreators(blogsActions, dispatch);
+
+    const user = new User(authenticate.accessToken, authenticate.accessTokenSecret);
+    actions.fetch(user);
     this.updateMenu();
   }
 
@@ -35,13 +41,13 @@ class App extends React.Component {
   }
 
   editor() {
-    const { authenticate, posts, dispatch } = this.props;
+    const { authenticate, blogs, posts, dispatch } = this.props;
     const actions = bindActionCreators(postsActions, dispatch);
     const post = posts.find((post) => post.selected);
     const tumblr = this.createTumblr();
     return (
       <div id="layout">
-        <Sidebar posts={posts} tumblr={tumblr}
+        <Sidebar blogs={blogs} posts={posts} tumblr={tumblr}
           onRemove={actions.remove}
           onSelect={actions.select}
           onCreate={actions.create} />
