@@ -2,6 +2,11 @@ import React from 'react';
 import FontAwesome from 'react-fontawesome';
 
 export default class Sidebar extends React.Component {
+  selectBlog(e) {
+    const { onSelectBlog } = this.props;
+    onSelectBlog(e.target.value);
+  }
+
   select(post) {
     const { onSelect } = this.props;
     onSelect(post);
@@ -46,12 +51,13 @@ export default class Sidebar extends React.Component {
   render() {
     const { blogs, posts } = this.props;
     const blogItems = blogs.map(::this.makeBlog);
+    const blog = blogs.find((blog) => blog.selected);
     const items = posts.map(::this.makeItem);
 
     return <div id="list" className="sidebar">
       <div className="sidebar__nav">
         <div className="sidebar__blogs">
-          <select>{blogItems}</select>
+          <select onChange={::this.selectBlog} defaultValue={blog.name}>{blogItems}</select>
         </div>
         <div className="sidebar__actions">
           <button className="primary-button pure-button"

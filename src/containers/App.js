@@ -43,11 +43,13 @@ class App extends React.Component {
   editor() {
     const { authenticate, blogs, posts, dispatch } = this.props;
     const actions = bindActionCreators(postsActions, dispatch);
+    const ba = bindActionCreators(blogsActions, dispatch);
     const post = posts.find((post) => post.selected);
     const tumblr = this.createTumblr();
     return (
       <div id="layout">
         <Sidebar blogs={blogs} posts={posts} tumblr={tumblr}
+          onSelectBlog={ba.select}
           onRemove={actions.remove}
           onSelect={actions.select}
           onCreate={actions.create} />
