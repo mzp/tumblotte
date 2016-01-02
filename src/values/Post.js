@@ -1,6 +1,7 @@
 export default class Post {
-  constructor({ id, content, tumblrId, dirty, selected = false}) {
+  constructor({ id, blogName, content, tumblrId, dirty, selected = false}) {
     this.id = id;
+    this.blogName = blogName;
     this.content = content || '';
     this.tumblrId = tumblrId || null;
     this.dirty = dirty;

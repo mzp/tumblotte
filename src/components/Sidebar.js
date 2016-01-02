@@ -14,7 +14,8 @@ export default class Sidebar extends React.Component {
 
   create() {
     const { onCreate } = this.props;
-    onCreate();
+    const { name } = this.selectedBlog();
+    onCreate({ blogName: name });
   }
 
   remove() {
@@ -53,10 +54,15 @@ export default class Sidebar extends React.Component {
     return (<option key={blog.name} value={blog.name}>{blog.title}</option>);
   }
 
+  selectedBlog() {
+    const { blogs } = this.props;
+    return blogs.find((blog) => blog.selected);
+  }
+
   render() {
     const { blogs, posts } = this.props;
     const blogItems = blogs.map(::this.makeBlog);
-    const blog = blogs.find((blog) => blog.selected);
+    const blog = this.selectedBlog();
     const items = posts.map(::this.makeItem);
 
     return <div id="list" className="sidebar">

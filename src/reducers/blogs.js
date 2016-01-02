@@ -3,7 +3,8 @@ import { handleActions } from 'redux-actions';
 export default handleActions({
   SELECT_BLOG: (state, action) => {
     return state.map((blog) => {
-      return { ...blog, selected: blog.name === action.payload }
+      const { name } = action.payload;
+      return { ...blog, selected: blog.name === name }
     })
   },
 

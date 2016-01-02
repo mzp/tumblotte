@@ -25,6 +25,10 @@ export default {
     }
   },
 
-  fetch: createAction('FETCH', (tumblr, count = 10) =>
-    tumblr.fetch(count))
+  fetch: createAction('FETCH', (tumblrBlog, count = 10) =>
+    tumblrBlog.fetch(count)
+      .then((posts) => Promise.resolve({
+        blogName: tumblrBlog.name,
+        posts
+      })))
 };

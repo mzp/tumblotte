@@ -1,6 +1,7 @@
 import { handleActions } from 'redux-actions';
 import Post from '../values/Post';
 import max from 'lodash.max';
+import uuid from 'node-uuid';
 
 function updateWith(state, post, f) {
   return state.map((x) => {
@@ -14,15 +15,16 @@ function updateWith(state, post, f) {
 
 export default handleActions({
   '@@INIT': (state, action) =>
-    state.map((post, i) =>
-      new Post({ ...post, id: i, selected: false })),
+    state.map((post) =>
+      new Post({ ...post, selected: false })),
 
   CREATE: (state, action) => {
-    const max_id = max(state, (post) => post.id) || { id: 0 };
+    const id = uuid.v1();
+    const { blogName } = action.payload;
 
     return [
       new Post({
-        id: ((max_id).id || 0) + 1,
+        id, blogName,
         content: 'new post\n\nwrite here...',
         dirty: true
       }),
@@ -60,19 +62,22 @@ export default handleActions({
   },
 
   FETCH: (state, action) => {
-    const newPosts = action.payload.map((response) => {
-      const { id, title, body } = response;
+    const { blogName, posts } = action.payload;
+    const newPosts = posts.map((post) => {
+      const { id, title, body } = post;
+      const old = state.find((x) => x.tumblrId === id);
+
       return new Post({
-        id,
+        id: old ? old.id : uuid.v1(),
+        blogName,
         tumblrId: id,
         content: title + "\n\n" + body.trim(),
         dirty: false
       });
     });
 
-    const remainPosts = state.filter((post) => {
-      return !action.payload.find((response) =>
-          post.tumblrId === response.id);
+    const remainPosts = state.filter((old) => {
+      return !posts.find((post) => old.tumblrId === post.id);
     });
 
     return [...newPosts, ...remainPosts];
