@@ -1,5 +1,6 @@
 {
-  "name": "tumblr-editor",
+  "name": "Tumblotte",
+  "repository": "https://github.com/mzp/tumblotte",
   "version": "1.0.0",
   "description": "tumblr editor",
   "main": "app/index.js",
