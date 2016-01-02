@@ -71,9 +71,9 @@ export class User {
 }
 
 export class Blog {
-  constructor(host, accessToken, accessTokenSecret) {
-    this.host = host;
-    this.blog = new TumblrBlog('mzp-text.tumblr.com', {
+  constructor(name, accessToken, accessTokenSecret) {
+    this.host = `${name}.tumblr.com`;
+    this.blog = new TumblrBlog(this.host, {
       consumer_key: oauth.consumer_key,
       consumer_secret: oauth.consumer_secret,
       token: accessToken,
@@ -137,6 +137,6 @@ export class Blog {
   }
 
   url(tumblrId) {
-    return `https://mzp-text.tumblr.com/post/${tumblrId}`
+    return `https://${this.host}/post/${tumblrId}`
   }
 }

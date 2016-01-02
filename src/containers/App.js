@@ -34,8 +34,10 @@ class App extends React.Component {
   }
 
   createTumblr() {
-    const { authenticate } = this.props;
-    return new Blog('mzp-text.tumblr.com',
+    const { blogs, authenticate } = this.props;
+    const { name } = blogs.find((x) => x.selected);
+
+    return new Blog(name,
       authenticate.accessToken,
       authenticate.accessTokenSecret);
   }
