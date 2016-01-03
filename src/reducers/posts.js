@@ -18,6 +18,10 @@ export default handleActions({
     state.map((post) =>
       new Post({ ...post, selected: false })),
 
+  '@@redux/INIT': (state, action) =>
+    state.map((post) =>
+      new Post({ ...post, selected: false })),
+
   CREATE: (state, action) => {
     const id = uuid.v1();
     const { blogName } = action.payload;

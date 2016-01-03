@@ -6,6 +6,10 @@ export default handleActions({
     return new Authenticate(state);
   },
 
+  '@@redux/INIT': (state, action) => {
+    return new Authenticate(state);
+  },
+
   AUTHORIZE: (state, action) => {
     const { authorizeUrl, requestToken, requestTokenSecret } = action.payload;
     return state.authorize(authorizeUrl, requestToken, requestTokenSecret);
