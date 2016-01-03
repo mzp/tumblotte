@@ -1,10 +1,11 @@
 export default class Post {
-  constructor({ id, blogName, content, tumblrId, dirty, selected = false}) {
+  constructor({ id, blogName, content, tumblrId, dirty, createdAt, selected = false}) {
     this.id = id;
     this.blogName = blogName;
     this.content = content || '';
     this.tumblrId = tumblrId || null;
     this.dirty = dirty;
+    this.createdAt = createdAt ? new Date(createdAt) : new Date();
     this.selected = selected;
   }
 

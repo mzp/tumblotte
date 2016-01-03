@@ -1,11 +1,13 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { default as persistStorage } from 'redux-localstorage';
 import promiseMiddleware from 'redux-promise';
+import storeDB from '../storage/middleware';
 import rootReducer from '../reducers';
 
 const finalCreateStore = compose(
   applyMiddleware(promiseMiddleware),
-  persistStorage(['authenticate', 'blogs', 'posts'])
+  persistStorage(['authenticate', 'blogs', 'posts']),
+  storeDB
 )(createStore);
 
 export default function configureStore(initialState) {

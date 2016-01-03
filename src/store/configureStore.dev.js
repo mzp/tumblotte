@@ -4,10 +4,12 @@ import promiseMiddleware from 'redux-promise';
 import { default as persistStorage } from 'redux-localstorage';
 import rootReducer from '../reducers';
 import DevTools from '../containers/DevTools';
+import storeDB from '../storage/middleware';
 
 const finalCreateStore = compose(
   applyMiddleware(promiseMiddleware),
   persistStorage(['authenticate', 'blogs', 'posts']),
+  storeDB,
   DevTools.instrument(),
   persistState(
     window.location.href.match(
