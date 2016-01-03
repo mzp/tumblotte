@@ -64,7 +64,7 @@ export default handleActions({
   FETCH: (state, action) => {
     const { blogName, posts } = action.payload;
     const newPosts = posts.map((post) => {
-      const { id, title, body } = post;
+      const { id, title, body, date } = post;
       const old = state.find((x) => x.tumblrId === id);
 
       return new Post({
@@ -72,6 +72,7 @@ export default handleActions({
         blogName,
         tumblrId: id,
         content: title + "\n\n" + body.trim(),
+        createdAt: new Date(date),
         dirty: false
       });
     });
@@ -80,6 +81,12 @@ export default handleActions({
       return !posts.find((post) => old.tumblrId === post.id);
     });
 
-    return [...newPosts, ...remainPosts];
+    return [...newPosts, ...remainPosts].sort((x,y) =>
+      y.createdAt.getTime() - x.createdAt.getTime());
+  },
+
+  SELECT_BLOG: (state, action) => {
+    const { posts } = action.payload;
+    return posts;
   }
 }, []);
