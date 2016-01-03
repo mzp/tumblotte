@@ -24,9 +24,20 @@ export default {
       });
   },
 
-  updates: (posts) => {
-    const xs = posts.map((post) => db().posts.put(post));
-    return Promise.all(xs);
+  updates: (blogName, posts) => {
+    const ids = posts.map((x) => x.id);
+
+    const puts =
+      posts.map((post) => db().posts.put(post));
+
+    const deletes =
+      db().posts
+        .where('blogName')
+        .equals(blogName)
+        .and((post) => ids.indexOf(post.id) === -1)
+        .delete();
+
+    return Promise.all(puts).then(() => deletes);
   }
 }
 

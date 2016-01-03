@@ -7,9 +7,8 @@ import DevTools from '../containers/DevTools';
 import storeDB from '../storage/middleware';
 
 const finalCreateStore = compose(
-  applyMiddleware(promiseMiddleware),
+  applyMiddleware(promiseMiddleware, storeDB),
   persistStorage(['authenticate', 'blogs', 'posts']),
-  storeDB,
   DevTools.instrument(),
   persistState(
     window.location.href.match(

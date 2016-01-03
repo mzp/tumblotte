@@ -1,4 +1,5 @@
 import { createAction } from 'redux-actions';
+import PostStorage from '../storage/PostStorage';
 
 export default {
   create: createAction('CREATE'),

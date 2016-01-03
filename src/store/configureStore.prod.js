@@ -5,9 +5,8 @@ import storeDB from '../storage/middleware';
 import rootReducer from '../reducers';
 
 const finalCreateStore = compose(
-  applyMiddleware(promiseMiddleware),
-  persistStorage(['authenticate', 'blogs', 'posts']),
-  storeDB
+  applyMiddleware(promiseMiddleware, storeDB),
+  persistStorage(['authenticate', 'blogs', 'posts'])
 )(createStore);
 
 export default function configureStore(initialState) {
