@@ -14,5 +14,7 @@ export default handleActions({
       const selected = old && old.selected;
       return { name, title, selected }
     })
-  }
+  },
+
+  LOGOUT: (state, action) => []
 }, []);

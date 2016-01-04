@@ -20,5 +20,5 @@ export default handleActions({
     return state.verify(accessToken, accessTokenSecret);
   },
 
-  LOGOUT: (state, action) => { return state.logout(); },
+  LOGOUT: (state, action) => { return new Authenticate({}) }
 }, { });

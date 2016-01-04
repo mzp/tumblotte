@@ -92,5 +92,7 @@ export default handleActions({
   SELECT_BLOG: (state, action) => {
     const { posts } = action.payload;
     return posts;
-  }
+  },
+
+  LOGOUT: (state, action) => []
 }, []);
