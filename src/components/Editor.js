@@ -1,11 +1,34 @@
 import React from 'react';
 import FontAwesome from 'react-fontawesome';
+import debounce from 'lodash.debounce';
+
 const shell = global.require('shell');
 
 export default class Editor extends React.Component {
-  change(e) {
-    const { post, onChange } = this.props;
-    onChange({ post, value: e.target.value});
+  constructor() {
+    super();
+
+    this.delayedCallback = debounce((event) => {
+      const { post, onChange } = this.props;
+      onChange({ post, value: event.target.value});
+    }, 300);
+  }
+
+  componentWillUpdate() {
+    const { post } = this.props;
+
+    // textareaをuncontrolled componentにしてるので、
+    // ポストが切り替わったタイミングの更新は自分でやる。
+    if(post && this.prevId != post.id) {
+      const textarea = document.getElementById('editor-textarea');
+      textarea.value = post.content;
+      this.prevId = post.id;
+    }
+  }
+
+  change(event) {
+    event.persist();
+    this.delayedCallback(event);
   }
 
   open() {
@@ -34,8 +57,8 @@ export default class Editor extends React.Component {
     }
 
     return <div id="editor" className="editor pure-u-1-2 pure-form">
-            <textarea className="editor__text"
-               value={post.content}
+            <textarea id="editor-textarea" className="editor__text"
+               defaultValue={post.content}
                onChange={::this.change} />
             <div className="editor__nav">
               <button className="primary-button pure-button" onClick={::this.doPost}>
