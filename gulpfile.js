@@ -51,7 +51,7 @@ gulp.task('package', ['build:css', 'build:font', 'build:js:release'], function(d
  packager({
    dir: 'app',
    out: 'package',
-   name: 'Tumblr',
+   name: 'Tumblotte',
    arch: 'x64',
    platform: 'darwin',
    version: '0.36.2',
