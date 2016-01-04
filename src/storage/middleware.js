@@ -6,7 +6,10 @@ export default function(store) {
       const result = next(action);
       const { blogs, posts } = store.getState();
       const blog = blogs.find((x) => x.selected);
-      PostStorage.updates(blog.name, posts);
+
+      if (blog) {
+        PostStorage.updates(blog.name, posts);
+      }
       return result;
     }
   }

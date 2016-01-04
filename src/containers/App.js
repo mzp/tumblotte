@@ -24,8 +24,11 @@ class App extends React.Component {
     const { authenticate, dispatch } = this.props;
     const actions = bindActionCreators(blogsActions, dispatch);
 
-    const user = new User(authenticate.accessToken, authenticate.accessTokenSecret);
-    actions.fetch(user);
+    if(authenticate.isAuthenticated) {
+      const user = new User(authenticate.accessToken, authenticate.accessTokenSecret);
+      actions.fetch(user);
+    }
+
     this.updateMenu();
   }
 
@@ -35,7 +38,10 @@ class App extends React.Component {
 
   createTumblr() {
     const { blogs, authenticate } = this.props;
-    const { name } = blogs.find((x) => x.selected);
+    const blog = blogs.find((x) => x.selected);
+    if(!blog) { return; }
+
+    const { name } = blog;
 
     return new Blog(name,
       authenticate.accessToken,

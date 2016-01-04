@@ -68,7 +68,7 @@ export default class Sidebar extends React.Component {
     return <div id="list" className="sidebar">
       <div className="sidebar__nav">
         <div className="sidebar__blogs">
-          <select onChange={::this.selectBlog} defaultValue={blog.name}>{blogItems}</select>
+          <select onChange={::this.selectBlog} defaultValue={blog && blog.name}>{blogItems}</select>
         </div>
         <div className="sidebar__actions">
           <button className="primary-button pure-button"
