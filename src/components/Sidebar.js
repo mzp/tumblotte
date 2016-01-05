@@ -2,6 +2,11 @@ import React from 'react';
 import FontAwesome from 'react-fontawesome';
 
 export default class Sidebar extends React.Component {
+  componentDidMount() {
+    const { onFetchBlogs } = this.props;
+    onFetchBlogs();
+  }
+
   selectBlog(e) {
     const { onSelectBlog } = this.props;
     onSelectBlog(e.target.value);

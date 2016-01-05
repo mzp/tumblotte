@@ -21,6 +21,10 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    this.updateMenu();
+  }
+
+  fetchBlogs() {
     const { authenticate, dispatch } = this.props;
     const actions = bindActionCreators(blogsActions, dispatch);
 
@@ -28,8 +32,6 @@ class App extends React.Component {
       const user = new User(authenticate.accessToken, authenticate.accessTokenSecret);
       actions.fetch(user);
     }
-
-    this.updateMenu();
   }
 
   componentWillUpdate() {
@@ -58,6 +60,7 @@ class App extends React.Component {
       <div id="layout">
         <Sidebar blogs={blogs} posts={posts} tumblr={tumblr}
           onSelectBlog={ba.select}
+          onFetchBlogs={::this.fetchBlogs}
           onFetch={actions.fetch}
           onRemove={actions.remove}
           onSelect={actions.select}
