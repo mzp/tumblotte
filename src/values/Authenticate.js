@@ -7,6 +7,11 @@ export default class Authenticate {
     this.requestTokenSecret = requestTokenSecret;
   }
 
+  init() {
+    const { accessToken, accessTokenSecret } = this;
+    return new Authenticate({ accessToken, accessTokenSecret });
+  }
+
   authorize(authorizeUrl, requestToken, requestTokenSecret) {
     return new Authenticate({ ...this, authorizeUrl, requestToken, requestTokenSecret });
   }

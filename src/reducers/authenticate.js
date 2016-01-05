@@ -3,11 +3,11 @@ import Authenticate from '../values/Authenticate';
 
 export default handleActions({
   '@@INIT': (state, action) => {
-    return new Authenticate(state);
+    return new Authenticate(state).init();
   },
 
   '@@redux/INIT': (state, action) => {
-    return new Authenticate(state);
+    return new Authenticate(state).init();
   },
 
   AUTHORIZE: (state, action) => {
