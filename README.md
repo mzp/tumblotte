@@ -23,3 +23,7 @@ npm run electron
 ```
 npm run gulp package
 ```
+
+## Acknowledge
+### Icon
+:dizzy: emoji is provided free by [Emoji One](http://emojione.com/).

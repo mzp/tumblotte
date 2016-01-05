@@ -55,6 +55,7 @@ gulp.task('package', ['build:css', 'build:font', 'build:js:release'], function(d
    arch: 'x64',
    platform: 'darwin',
    version: '0.36.2',
+   icon: 'assets/icons/icon.icns',
    overwrite: true
  }, function (err, path) {
    done();
