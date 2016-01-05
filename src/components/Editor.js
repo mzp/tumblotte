@@ -14,7 +14,7 @@ export default class Editor extends React.Component {
     }, 300);
   }
 
-  componentWillUpdate() {
+  componentDidUpdate() {
     const { post } = this.props;
 
     // textareaをuncontrolled componentにしてるので、
