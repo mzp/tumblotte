@@ -24,7 +24,14 @@ export default function(actions, store, tumblr) {
 
   const file = [
     { label: 'New', accelerator: 'Command+N', enabled: authenticated,
-      click: () => { actions.posts.create(); } },
+      click: () => {
+        const { blogs } = store.getState();
+        const blog = blogs.find((blog) => blog.selected);
+
+        if(blog) {
+          actions.posts.create(blog.name);
+        }
+      } },
     { label: 'Fetch', enabled: authenticated,
       click: () => { actions.posts.fetch(tumblr); } },
     { label: 'Post/Update', accelerator: 'Command+U', enabled: authenticated,
