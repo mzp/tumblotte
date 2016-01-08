@@ -13,14 +13,18 @@ function updateWith(state, post, f) {
   });
 }
 
+function selectFirst(xs) {
+  return xs.map((x, i) => i == 0 ? x.select() : x);
+}
+
 export default handleActions({
   '@@INIT': (state, action) =>
-    state.map((post) =>
-      new Post({ ...post, selected: false })),
+    selectFirst(state.map((post) =>
+      new Post({ ...post, selected: false }))),
 
   '@@redux/INIT': (state, action) =>
-    state.map((post) =>
-      new Post({ ...post, selected: false })),
+    selectFirst(state.map((post) =>
+      new Post({ ...post, selected: false }))),
 
   CREATE: (state, action) => {
     const id = uuid.v1();
@@ -38,7 +42,7 @@ export default handleActions({
   },
 
   REMOVE: (state, action) => {
-    return state.filter((x) => x.id != action.payload.id)
+    return selectFirst(state.filter((x) => x.id != action.payload.id))
   },
 
   SELECT: (state, action) => {
