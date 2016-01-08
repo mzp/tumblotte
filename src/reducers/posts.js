@@ -30,9 +30,10 @@ export default handleActions({
       new Post({
         id, blogName,
         content: 'new post\n\nwrite here...',
-        dirty: true
+        dirty: true,
+        selected: true
       }),
-      ...state
+      ...state.map((x) => x.unselect())
     ];
   },
 
