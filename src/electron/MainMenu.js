@@ -15,11 +15,15 @@ export default function(actions, store, tumblr) {
   const authenticated = store.getState().authenticate.isAuthenticated;
 
   const main = [
-    { label: 'Logout', enabled: authenticated,
-      click: () => { actions.authenticate.logout(); } },
-    { type: "separator" },
-    { label: 'Quit', accelerator: 'Command+Q',
-      click: () => { app.quit(); } }
+    { label: 'About Tumblotte', role: 'about' },
+    { type: 'separator' },
+    { label: 'Services', role: 'services', submenu: [] },
+    { type: 'separator' },
+    { label: 'Hide ' + name, accelerator: 'Command+H', role: 'hide' },
+    { label: 'Hide Others', accelerator: 'Command+Shift+H', role: 'hideothers' },
+    { label: 'Show All', role: 'unhide' },
+    { type: 'separator' },
+    { label: 'Quit', accelerator: 'Command+Q', click: function() { app.quit(); } }
   ];
 
   const file = [
@@ -42,7 +46,10 @@ export default function(actions, store, tumblr) {
             actions.posts.post(tumblr, post);
           }
         });
-      } }
+      } },
+    { type: 'separator' },
+    { label: 'Logout', enabled: authenticated,
+      click: () => { actions.authenticate.logout(); } }
   ];
 
   const edit  = [
@@ -52,6 +59,13 @@ export default function(actions, store, tumblr) {
     { label: "Cut", accelerator: "Command+X", selector: "cut:" },
     { label: "Copy", accelerator: "Command+C", selector: "copy:" },
     { label: "Paste", accelerator: "Command+V", selector: "paste:" }
+  ];
+
+  const window_menu = [
+    { label: 'Minimize', accelerator: 'CmdOrCtrl+M', role: 'minimize' },
+    { label: 'Close', accelerator: 'CmdOrCtrl+W', role: 'close' },
+    { type: 'separator' },
+    { label: 'Bring All to Front', role: 'front' }
   ];
 
   const develop = [
@@ -68,6 +82,7 @@ export default function(actions, store, tumblr) {
     { label: 'Tumblr', submenu: main },
     { label: 'File', submenu: file },
     { label: 'Edit', submenu: edit },
+    { label: 'Window', role: 'window', submenu: window_menu },
     { label: 'Develop', submenu: develop }
   ]);
 }

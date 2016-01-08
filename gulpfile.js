@@ -56,7 +56,9 @@ gulp.task('package', ['build:css', 'build:font', 'build:js:release'], function(d
    platform: 'darwin',
    version: '0.36.2',
    icon: 'assets/icons/icon.icns',
-   overwrite: true
+   overwrite: true,
+   'app-bundle-id': 'jp.mzp.tumblotte',
+   'app-version': '0.1.0',
  }, function (err, path) {
    done();
  });
