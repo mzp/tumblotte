@@ -1,8 +1,18 @@
-# Tumblotte 💫
+# Tumblotte
+Markdown editor of Tumblr for MacOS X. 💫
 
 ![screenshot](https://raw.githubusercontent.com/mzp/tumblotte/master/docs/screenshot.png)
 
-Tumblotte is a markdown editor to post Tumblr notes.
+## Features
+
+ * Live preview for markdown.
+ * Post/update text posts.
+ * Fetch exist posts.
+ * Multi blog support.
+
+### Limitation
+
+ * Support only text posts.
 
 ## Build
 ### Prepare
@@ -21,7 +31,7 @@ npm run electron
 ### :package:
 
 ```
-npm run gulp package
+npm run gulp dmg
 ```
 
 ## Acknowledge
