@@ -12,7 +12,7 @@ const consumer = new OAuth(
   oauth.consumer_key,
   oauth.consumer_secret,
   "1.0A",
-  "https://example.com",
+  "https://mzp.jp",
   "HMAC-SHA1"
 );
 
