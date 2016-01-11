@@ -37,12 +37,16 @@ export default function(actions, store, tumblr) {
         }
       } },
     { label: 'Fetch', enabled: authenticated,
-      click: () => { actions.posts.fetch(tumblr); } },
+      click: () => {
+        actions.loading.start('fetch');
+        actions.posts.fetch(tumblr);
+      } },
     { label: 'Post/Update', accelerator: 'Command+U', enabled: authenticated,
       click: () => {
         const { posts } = store.getState();
         posts.forEach((post) => {
           if (post.selected) {
+            actions.loading.start('post');
             actions.posts.post(tumblr, post);
           }
         });

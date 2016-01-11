@@ -17,6 +17,7 @@ class App extends React.Component {
     const { store, dispatch } = this.props;
     menu({
       authenticate: bindActionCreators(authenticateActions, dispatch),
+      loading: bindActionCreators(loadingActions, dispatch),
       posts: bindActionCreators(postsActions, dispatch),
     }, store, this.createTumblr());
   }
