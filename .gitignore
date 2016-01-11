@@ -3,3 +3,4 @@ app/bundle.js
 app/css
 app/fonts
 package/
+*.dmg

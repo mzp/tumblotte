@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 
+var appdmg = require('gulp-appdmg');
 var babelify = require('babelify');
 var browserify = require('browserify');
 var fontAwesome = require('node-font-awesome');
@@ -62,6 +63,20 @@ gulp.task('package', ['build:css', 'build:font', 'build:js:release'], function(d
  }, function (err, path) {
    done();
  });
+});
+
+gulp.task('dmg', ['package'], function() {
+  function pad(n){return n<10 ? '0'+n : n.toString(); }
+  var date = new Date();
+  var name = pad(date.getFullYear())
+    + pad(date.getMonth() + 1)
+    + pad(date.getDate());
+
+  return gulp.src([])
+    .pipe(appdmg({
+      source: 'assets/dmg/appdmg.json',
+      target: 'Tumblotte-' + name + '.dmg'
+    }));
 });
 
 gulp.task('build', ['build:css', 'build:font', 'build:js']);

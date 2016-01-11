@@ -1,0 +1,10 @@
+{
+  "title": "Tumblotte",
+  "background": "background.png",
+  "icon": "../icons/icon.icns",
+  "icon-size": 80,
+  "contents": [
+    { "x": 460, "y": 170, "type": "link", "path": "/Applications" },
+    { "x": 192, "y": 170, "type": "file", "path": "../../package/Tumblotte-darwin-x64/Tumblotte.app" }
+  ]
+}
