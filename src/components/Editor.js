@@ -42,7 +42,8 @@ export default class Editor extends React.Component {
   }
 
   render() {
-    const { post } = this.props;
+    const { loading, post } = this.props;
+    const iconName = loading.post ? 'hourglass-half' : 'rocket';
 
     if(!post) {
       return <div id="editor" className="pure-u-1-2 editor editor--unselect" />
@@ -62,7 +63,7 @@ export default class Editor extends React.Component {
                onChange={::this.change} />
             <div className="editor__nav">
               <button className="primary-button pure-button" onClick={::this.doPost}>
-                <FontAwesome name='rocket' />
+                <FontAwesome name={iconName} />
               </button>
               {openButton}
             </div>

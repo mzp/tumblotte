@@ -65,10 +65,11 @@ export default class Sidebar extends React.Component {
   }
 
   render() {
-    const { blogs, posts } = this.props;
+    const { blogs, loading, posts } = this.props;
     const blogItems = blogs.map(::this.makeBlog);
     const blog = this.selectedBlog();
     const items = posts.map(::this.makeItem);
+    const fetchIcon = loading.fetch ? 'hourglass-half' : 'refresh';
 
     return <div id="list" className="sidebar">
       <div className="sidebar__nav">
@@ -86,7 +87,7 @@ export default class Sidebar extends React.Component {
           </button>
           <button className="secondary-button pure-button"
             onClick={::this.fetch}>
-            <FontAwesome name='refresh' />
+            <FontAwesome name={fetchIcon} />
           </button>
         </div>
       </div>

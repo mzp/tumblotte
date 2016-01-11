@@ -26,15 +26,24 @@ export default class Login extends React.Component {
   }
 
   render() {
-    const { authorize, authenticate: { authorizeUrl }} = this.props;
-
+    const { authorize, authenticate: { authorizeUrl }, loading } = this.props;
     if (authorizeUrl) {
       return <div id='login' className='login'><webview id='tumblr-auth' src={authorizeUrl} nodeintegration></webview></div>
     } else {
+      var icon, className;
+
+      if(loading.authorize) {
+        icon = 'hourglass-half';
+        className = 'pure-button secondary-button login__button'
+      } else {
+        icon = 'sign-in';
+        className = 'pure-button primary-button login__button'
+      }
+
       return (
         <div id='login' className='login'>
-          <button className='pure-button primary-button login__button' onClick={authorize}>
-            <FontAwesome name='sign-in' size='4x' />
+          <button className={className} onClick={authorize}>
+            <FontAwesome name={icon} size='4x' />
           </button>
         </div>);
     }

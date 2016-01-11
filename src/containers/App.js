@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import postsActions from '../actions/posts';
 import authenticateActions from '../actions/authenticate';
 import blogsActions from '../actions/blogs';
+import loadingActions from '../actions/loading';
+import postsActions from '../actions/posts';
 import Sidebar from '../components/Sidebar';
 import Editor from '../components/Editor';
 import Preview from '../components/Preview';
@@ -51,35 +52,45 @@ class App extends React.Component {
   }
 
   editor() {
-    const { authenticate, blogs, posts, dispatch } = this.props;
+    const { authenticate, blogs, loading, posts, dispatch } = this.props;
     const actions = bindActionCreators(postsActions, dispatch);
     const ba = bindActionCreators(blogsActions, dispatch);
     const post = posts.find((post) => post.selected);
     const tumblr = this.createTumblr();
     return (
       <div id="layout">
-        <Sidebar blogs={blogs} posts={posts} tumblr={tumblr}
+        <Sidebar blogs={blogs} posts={posts} tumblr={tumblr} loading={loading}
           onSelectBlog={ba.select}
           onFetchBlogs={::this.fetchBlogs}
-          onFetch={actions.fetch}
+          onFetch={this.loading('fetch', actions.fetch)}
           onRemove={actions.remove}
           onSelect={actions.select}
           onCreate={actions.create} />
         <div id="main" className="pure-g">
-          <Editor post={post} tumblr={tumblr}
+          <Editor post={post} loading={loading} tumblr={tumblr}
             onChange={actions.change}
-            onPost={actions.post} />
+            onPost={this.loading('post', actions.post)} />
           <Preview post={post} />
         </div>
       </div>);
   }
 
+  loading(name, f) {
+    return (...args) =>  {
+      const { dispatch } = this.props;
+      const actions = bindActionCreators(loadingActions, dispatch);
+      actions.start(name);
+      return f(...args);
+    }
+  }
+
   login() {
-    const { authenticate, dispatch } = this.props;
+    const { authenticate, loading, dispatch } = this.props;
     const actions = bindActionCreators(authenticateActions, dispatch);
     return (
       <Login authenticate={authenticate}
-        authorize={actions.authorize}
+        authorize={this.loading('authorize', actions.authorize)}
+        loading={loading}
         getAccessToken={actions.getAccessToken} />);
   }
 
