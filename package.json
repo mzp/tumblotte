@@ -1,16 +1,16 @@
 {
   "name": "Tumblotte",
   "repository": "https://github.com/mzp/tumblotte",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "tumblr editor",
   "main": "app/index.js",
   "scripts": {
     "gulp": "gulp",
     "electron": "electron app/"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["tumblr", "editor"],
+  "author": "mzp <mzpppp@gmail.com>",
+  "license": "MIT License",
   "devDependencies": {
     "babel-plugin-transform-decorators": "^6.3.13",
     "babel-preset-es2015": "^6.3.13",
