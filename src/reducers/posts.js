@@ -82,6 +82,7 @@ export default handleActions({
         tumblrId: id,
         content: title + "\n\n" + body.trim(),
         createdAt: new Date(date),
+        selected: old ? old.selected : false,
         dirty: false
       });
     });
