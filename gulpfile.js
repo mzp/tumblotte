@@ -11,7 +11,7 @@ var packager = require('electron-packager');
 var preprocessify = require('preprocessify');
 
 function compile(debug) {
-  browserify({ entries: ['src/main.js'], debug })
+  browserify({ entries: ['src/main.js'], debug: debug })
     .transform(preprocessify({"DEBUG": debug }))
     .transform(babelify, {
       presets: ['stage-0', 'es2015', 'react']
