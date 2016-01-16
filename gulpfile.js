@@ -4,11 +4,11 @@ var appdmg = require('gulp-appdmg');
 var babelify = require('babelify');
 var browserify = require('browserify');
 var fontAwesome = require('node-font-awesome');
+var packager = require('electron-packager');
+var preprocessify = require('preprocessify');
 var source = require( 'vinyl-source-stream' );
 var sourcemaps = require('gulp-sourcemaps');
 var stylus = require('gulp-stylus');
-var packager = require('electron-packager');
-var preprocessify = require('preprocessify');
 
 function compile(debug) {
   browserify({ entries: ['src/main.js'], debug })
@@ -50,16 +50,16 @@ gulp.task('build:css', function () {
 
 gulp.task('package', ['build:css', 'build:font', 'build:js:release'], function(done) {
  packager({
-   dir: 'app',
-   out: 'package',
-   name: 'Tumblotte',
-   arch: 'x64',
-   platform: 'darwin',
-   version: '0.36.2',
-   icon: 'assets/icons/icon.icns',
-   overwrite: true,
    'app-bundle-id': 'jp.mzp.tumblotte',
    'app-version': '0.1.0',
+   arch: 'x64',
+   dir: 'app',
+   icon: 'assets/icons/icon.icns',
+   name: 'Tumblotte',
+   out: 'package',
+   overwrite: true,
+   platform: 'darwin',
+   version: '0.36.2',
  }, function (err, path) {
    done();
  });
