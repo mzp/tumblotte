@@ -59,6 +59,7 @@ gulp.task('package', ['build:css', 'build:font', 'build:js:release'], function(d
    out: 'package',
    overwrite: true,
    platform: 'darwin',
+   sign: 'Developer ID Application: HIROKI MIZUNO (VG2YYSKSHY)',
    version: '0.36.2',
  }, function (err, path) {
    done();
