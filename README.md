@@ -14,16 +14,18 @@ Markdown editor of Tumblr for MacOS X. 💫
 
  * Support only text posts.
 
-## Build
-### Prepare
+## Download/Install
+
+ 1. Download from https://github.com/mzp/tumblotte/releases.
+ 2. Open `Tumblotte-YYYYMMDD.dmg`
+ 3. Drag `Tumblotte.app` to Applications.
+
+## For Developer
+
+### Build
 
 ```
 npm install
-```
-
-### For debug
-
-```
 npm run gulp build
 npm run electron
 ```
