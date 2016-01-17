@@ -72,6 +72,14 @@ export default function(actions, store, tumblr) {
     { label: 'Bring All to Front', role: 'front' }
   ];
 
+  const help = [
+    { label: 'Send Feedback',
+      click: () => {
+        global.require('shell').openExternal('https://github.com/mzp/tumblotte/issues');
+      }
+    }
+  ];
+
   const develop = [
     { label: 'Reload', accelerator: 'Command+R',
       click: () => { mainWindow.restart(); } },
@@ -87,6 +95,7 @@ export default function(actions, store, tumblr) {
     { label: 'File', submenu: file },
     { label: 'Edit', submenu: edit },
     { label: 'Window', role: 'window', submenu: window_menu },
+    { label: 'Help', role: 'help', submenu: help },
     { label: 'Develop', submenu: develop }
   ]);
 }
