@@ -1,7 +1,7 @@
 # Tumblotte
 Markdown editor of Tumblr for MacOS X. 💫
 
-![screenshot](https://raw.githubusercontent.com/mzp/tumblotte/master/docs/screenshot.png)
+![screenshot](https://github.com/mzp/tumblotte/raw/master/docs/screenshot.png)
 
 ## Features
 
@@ -17,7 +17,7 @@ Markdown editor of Tumblr for MacOS X. 💫
 ## Download/Install
 
  1. Download from https://github.com/mzp/tumblotte/releases.
- 2. Open `Tumblotte-YYYYMMDD.dmg`
+ 2. Open `Tumblotte-YYYYMMDD.dmg`.
  3. Drag `Tumblotte.app` to Applications.
 
 ## For Developer
