@@ -30,21 +30,16 @@ app.on('window-all-closed', function() {
     }
 });
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-app.on('ready', function() {
-    // Create the browser window.
-    mainWindow = new BrowserWindow({width: 1024, height: 600});
+function createWindow() {
+  if(mainWindow) { return; }
 
-    // and load the index.html of the app.
-    mainWindow.loadURL('file://' + __dirname + '/index.html');
-    // mainWindow.toggleDevTools();
+  mainWindow = new BrowserWindow({width: 1024, height: 600});
+  mainWindow.loadURL('file://' + __dirname + '/index.html');
 
-    // Emitted when the window is closed.
-    mainWindow.on('closed', function() {
-        // Dereference the window object, usually you would store windows
-        // in an array if your app supports multi windows, this is the time
-        // when you should delete the corresponding element.
-        mainWindow = null;
-    });
-});
+  mainWindow.on('closed', function() {
+    mainWindow = null;
+  });
+};
+
+app.on('ready', createWindow);
+app.on('activate', createWindow);
