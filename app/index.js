@@ -11,6 +11,22 @@ app.on('window-all-closed', function() {
     // to stay active until the user quits explicitly with Cmd + Q
     if (process.platform != 'darwin') {
         app.quit();
+    } else {
+      // set default menu
+      var main = [
+        { label: 'About Tumblotte', role: 'about' },
+        { type: 'separator' },
+        { label: 'Services', role: 'services', submenu: [] },
+        { type: 'separator' },
+        { label: 'Hide Tumblotte', accelerator: 'Command+H', role: 'hide' },
+        { label: 'Hide Others', accelerator: 'Command+Shift+H', role: 'hideothers' },
+        { label: 'Show All', role: 'unhide' },
+        { type: 'separator' },
+        { label: 'Quit', accelerator: 'Command+Q', click: function() { app.quit(); } }
+      ];
+
+      var Menu = require('menu');
+      Menu.setApplicationMenu(Menu.buildFromTemplate([{ label: 'Tumblotte', submenu: main }]));
     }
 });
 
