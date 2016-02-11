@@ -2,7 +2,7 @@ import React from 'react';
 import DebounceTextArea from './DebounceTextArea';
 import IconButton from './IconButton';
 
-const shell = global.require('shell');
+const template = require('react-jade').compileFile(__dirname + '/Editor.jade');
 
 export default class Editor extends React.Component {
   change(event) {
@@ -10,7 +10,8 @@ export default class Editor extends React.Component {
     onChange({ post, value: event.target.value});
   }
 
-  open() {
+  doOpen() {
+    const shell = global.require('shell');
     const { tumblr, post } = this.props;
     shell.openExternal(tumblr.url(post.tumblrId));
   }
@@ -23,28 +24,17 @@ export default class Editor extends React.Component {
   render() {
     const { loading, post } = this.props;
 
-    if(!post) {
-      return <div id="editor" className="pure-u-1-2 editor editor--unselect" />
-    }
-
-    var openButton = '';
-    if(post.isPosted) {
-      openButton = (
-        <IconButton icon='external-link' onClick={::this.open} />);
-    }
-
-    return <div id="editor" className="editor pure-u-1-2 pure-form">
-            <DebounceTextArea id="editor-textarea" className="editor__text"
-               contentId={post.id}
-               content={post.content}
-               onChange={::this.change} />
-            <div className="editor__nav">
-              <IconButton primary={true}
-                 icon='rocket'
-                 loading={loading.post}
-                 onClick={::this.doPost} />
-              {openButton}
-            </div>
-          </div>
+    const { id, content, isPosted } = post || {};
+    return template({
+      DebounceTextArea,
+      IconButton,
+      id,
+      isPosted,
+      content,
+      loading: loading && loading.post,
+      doOpen: ::this.doOpen,
+      doPost: ::this.doPost,
+      onChange: ::this.change,
+    });
   }
 }

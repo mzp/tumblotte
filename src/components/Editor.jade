@@ -1,0 +1,8 @@
+#editor.pure-u-1-2.editor
+  if id
+    DebounceTextArea.editor__text(contentId=id, content=content, onChange=onChange)
+    .editor__nav
+      IconButton(primary=true, icon='rocket', loading=loading, onClick=doPost)
+
+      if isPosted
+        IconButton(icon='external-link', onClick=doOpen)
