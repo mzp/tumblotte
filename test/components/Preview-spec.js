@@ -17,17 +17,16 @@ describe('<Preview />', () => {
   });
 
   context('with post', () => {
-    const post = {
-      title: 'So Long, and Thanks for All the Fish',
-      body: `
+    const title = 'So Long, and Thanks for All the Fish';
+
+    const body = `
 # Heading 1
 ## Heading 2
 
 Go to [example.com](http://example.com)
-        `
-    };
+        `;
 
-    const subject = render(<Preview post={post} />);
+    const subject = render(<Preview title={title} body={body} />);
 
     it('renders title', () => {
       expect(subject.find('.preview__title')).to.be.text('So Long, and Thanks for All the Fish');

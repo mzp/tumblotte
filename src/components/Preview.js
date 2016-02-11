@@ -12,9 +12,9 @@ renderer.link = (href, title, text) => {
 
 export default class Preview extends React.Component {
   rawMarkup() {
-    const { post } = this.props;
-    if(post) {
-      const rawMarkup = marked(post.body, { sanitize: true, renderer });
+    const { body } = this.props;
+    if(body) {
+      const rawMarkup = marked(body, { sanitize: true, renderer });
       return { __html: rawMarkup };
     } else {
       return { __html: '' };
@@ -29,10 +29,10 @@ export default class Preview extends React.Component {
   }
 
   render() {
-    const { post } = this.props;
+    const { title } = this.props;
 
     return template({
-      title: post && post.title,
+      title: title,
       body: this.rawMarkup(),
       onClick: ::this.onClick
     });

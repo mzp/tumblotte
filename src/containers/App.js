@@ -61,6 +61,12 @@ class App extends React.Component {
     const actions = bindActionCreators(postsActions, dispatch);
     const ba = bindActionCreators(blogsActions, dispatch);
     const post = posts.find((post) => post.selected);
+    var title, body;
+
+    if(post) {
+      title = post.title;
+      body = post.body;
+    }
     const tumblr = this.createTumblr();
     return (
       <div id="layout">
@@ -75,7 +81,7 @@ class App extends React.Component {
           <Editor post={post} loading={loading} tumblr={tumblr}
             onChange={actions.change}
             onPost={this.loading('post', actions.post)} />
-          <Preview post={post} onLinkClick={::this.openLink} />
+          <Preview title={title} body={body} onLinkClick={::this.openLink} />
         </div>
       </div>);
   }
