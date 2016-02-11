@@ -1,6 +1,6 @@
 import React from 'react';
-import FontAwesome from 'react-fontawesome';
 import DebounceTextArea from './DebounceTextArea';
+import IconButton from './IconButton';
 
 const shell = global.require('shell');
 
@@ -22,7 +22,6 @@ export default class Editor extends React.Component {
 
   render() {
     const { loading, post } = this.props;
-    const iconName = loading.post ? 'hourglass-half' : 'rocket';
 
     if(!post) {
       return <div id="editor" className="pure-u-1-2 editor editor--unselect" />
@@ -31,9 +30,7 @@ export default class Editor extends React.Component {
     var openButton = '';
     if(post.isPosted) {
       openButton = (
-        <button className="secondary-button pure-button" onClick={::this.open}>
-          <FontAwesome name='external-link' />
-        </button>);
+        <IconButton icon='external-link' onClick={::this.open} />);
     }
 
     return <div id="editor" className="editor pure-u-1-2 pure-form">
@@ -42,9 +39,10 @@ export default class Editor extends React.Component {
                content={post.content}
                onChange={::this.change} />
             <div className="editor__nav">
-              <button className="primary-button pure-button" onClick={::this.doPost}>
-                <FontAwesome name={iconName} />
-              </button>
+              <IconButton primary={true}
+                 icon='rocket'
+                 loading={loading.post}
+                 onClick={::this.doPost} />
               {openButton}
             </div>
           </div>
