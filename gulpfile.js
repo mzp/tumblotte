@@ -4,6 +4,7 @@ var appdmg = require('gulp-appdmg');
 var babelify = require('babelify');
 var browserify = require('browserify');
 var fontAwesome = require('node-font-awesome');
+var mocha = require('gulp-mocha');
 var packager = require('electron-packager');
 var preprocessify = require('preprocessify');
 var source = require( 'vinyl-source-stream' );
@@ -27,6 +28,16 @@ gulp.task('build:js', function() {
 
 gulp.task('build:js:release', function() {
   compile(false);
+});
+
+gulp.task('test', function() {
+  gulp.src(['test/**/*.js'], { read: false })
+    .pipe(mocha({
+      require: 'test/spec-helper',
+      compilers: {
+        js: require('babel-core/register')
+      }
+    }));
 });
 
 gulp.task('build:font', function () {
