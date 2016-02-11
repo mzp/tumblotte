@@ -52,6 +52,10 @@ class App extends React.Component {
       authenticate.accessTokenSecret);
   }
 
+  openLink(url) {
+    global.require('shell').openExternal(url);
+  }
+
   editor() {
     const { authenticate, blogs, loading, posts, dispatch } = this.props;
     const actions = bindActionCreators(postsActions, dispatch);
@@ -71,7 +75,7 @@ class App extends React.Component {
           <Editor post={post} loading={loading} tumblr={tumblr}
             onChange={actions.change}
             onPost={this.loading('post', actions.post)} />
-          <Preview post={post} />
+          <Preview post={post} onLinkClick={::this.openLink} />
         </div>
       </div>);
   }

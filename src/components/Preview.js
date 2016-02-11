@@ -21,8 +21,8 @@ export default class Preview extends React.Component {
 
   click(e) {
     if (e.target.tagName == 'A') {
-      const { link } = e.target.attributes;
-      global.require('shell').openExternal(link.value);
+      const { onLinkClick } = this.props;
+      onLinkClick(e.target.attributes.link.value);
     }
   }
 
