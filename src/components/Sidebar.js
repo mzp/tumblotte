@@ -1,5 +1,6 @@
 import React from 'react';
 import FontAwesome from 'react-fontawesome';
+import SidebarItem from './SidebarItem';
 
 export default class Sidebar extends React.Component {
   componentDidMount() {
@@ -41,18 +42,13 @@ export default class Sidebar extends React.Component {
   }
 
   makeItem(post) {
-    const className =
-      `sidebar__item
-      ${post.selected ? 'sidebar__item--selected' : ''}
-    ${post.dirty ? 'sidebar__item--dirty' : ''}`;
-
-    return (
-        <div key={post.id}
-          className={className}
-          onClick={::this.select.bind(this, post)}>
-          <h4 className="sidebar__item-title">{post.title}</h4>
-          <p className='sidebar__item-body'>{post.body.substring(0, 20)}</p>
-        </div>);
+    return <SidebarItem
+      key={post.id}
+      onClick={::this.select.bind(this, post)}
+      title={post.title}
+      body={post.body}
+      selected={post.selected}
+      dirty={post.dirty} />
   }
 
   makeBlog(blog) {
