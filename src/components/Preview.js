@@ -2,6 +2,8 @@ import React from 'react';
 import marked from 'marked';
 import { Renderer } from 'marked';
 
+const template = require('react-jade').compileFile(__dirname + '/Preview.jade');
+
 // Don't open external link in electron window.
 const renderer = new Renderer();
 renderer.link = (href, title, text) => {
@@ -19,7 +21,7 @@ export default class Preview extends React.Component {
     }
   }
 
-  click(e) {
+  onClick(e) {
     if (e.target.tagName == 'A') {
       const { onLinkClick } = this.props;
       onLinkClick(e.target.attributes.link.value);
@@ -29,9 +31,10 @@ export default class Preview extends React.Component {
   render() {
     const { post } = this.props;
 
-    return <div id="preview" className="pure-u-1-2 preview">
-      <h1 className="preview__title">{post && post.title}</h1>
-      <div className="preview__body" dangerouslySetInnerHTML={this.rawMarkup()} onClick={::this.click}/>
-    </div>
+    return template({
+      title: post && post.title,
+      body: this.rawMarkup(),
+      onClick: ::this.onClick
+    });
   }
 }

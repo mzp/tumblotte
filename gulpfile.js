@@ -7,6 +7,7 @@ var fontAwesome = require('node-font-awesome');
 var mocha = require('gulp-mocha');
 var packager = require('electron-packager');
 var preprocessify = require('preprocessify');
+var react_jade = require('react-jade');
 var source = require( 'vinyl-source-stream' );
 var sourcemaps = require('gulp-sourcemaps');
 var stylus = require('gulp-stylus');
@@ -17,6 +18,7 @@ function compile(debug) {
     .transform(babelify, {
       presets: ['stage-0', 'es2015', 'react']
     })
+    .transform(react_jade)
     .bundle()
     .pipe( source( 'bundle.js' ) )
     .pipe( gulp.dest( './app/' ));
