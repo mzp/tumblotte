@@ -6,7 +6,6 @@ var browserify = require('browserify');
 var fontAwesome = require('node-font-awesome');
 var mocha = require('gulp-mocha');
 var packager = require('electron-packager');
-var preprocessify = require('preprocessify');
 var react_jade = require('react-jade');
 var source = require( 'vinyl-source-stream' );
 var sourcemaps = require('gulp-sourcemaps');
@@ -14,7 +13,6 @@ var stylus = require('gulp-stylus');
 
 function compile(debug) {
   browserify({ entries: ['src/main.js'], debug: debug })
-    .transform(preprocessify({"DEBUG": debug }))
     .transform(babelify, {
       presets: ['stage-0', 'es2015', 'react']
     })

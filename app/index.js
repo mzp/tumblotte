@@ -34,8 +34,13 @@ function createWindow() {
   if(mainWindow) { return; }
 
   mainWindow = new BrowserWindow({width: 1024, height: 600});
-  mainWindow.loadURL('file://' + __dirname + '/index.html');
-mainWindow.toggleDevTools();
+
+  if(process.env.TUMBLOTTE_ENV == 'dev') {
+    mainWindow.loadURL('file://' + __dirname + '/index_dev.html');
+    mainWindow.toggleDevTools();
+  } else {
+    mainWindow.loadURL('file://' + __dirname + '/index.html');
+  }
 
   mainWindow.on('closed', function() {
     mainWindow = null;

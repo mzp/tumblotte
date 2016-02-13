@@ -6,7 +6,8 @@
   "main": "app/index.js",
   "scripts": {
     "gulp": "gulp",
-    "electron": "electron app/"
+    "electron": "TUMBLOTTE_ENV=dev electron app/",
+    "electron.release": "electron app/"
   },
   "keywords": [
     "tumblr",
@@ -34,7 +35,6 @@
     "gulp-stylus": "^2.2.0",
     "mocha": "^2.4.5",
     "node-font-awesome": "^1.0.2",
-    "preprocessify": "0.0.6",
     "react-addons-test-utils": "^0.14.7",
     "redux-devtools": "^3.0.1",
     "redux-devtools-dock-monitor": "^1.0.1",
