@@ -4,7 +4,7 @@ import Login from './pages/Login';
 import Editor from './pages/Editor';
 import Authenticate from './pages/Authenticate';
 
-class App extends React.Component {
+export class App extends React.Component {
   render() {
     const { authenticate } = this.props;
 
