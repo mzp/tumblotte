@@ -35,6 +35,7 @@ gulp.task('build:js:release', function() {
 gulp.task('test', function() {
   gulp.src(['test/**/*.js'], { read: false })
     .pipe(mocha({
+      reporter: 'nyan',
       require: 'test/bootstrap',
       compilers: {
         js: require('babel-core/register')
