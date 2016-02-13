@@ -23,12 +23,12 @@ describe('<IconButton />', () => {
 
   describe('primary', () => {
     it('renders .primary-button', () => {
-      const subject = shallow(<IconButton primary={true} />);
+      const subject = shallow(<IconButton name='rocket' primary={true} />);
       expect(subject).to.have.className('primary-button')
     });
 
     it('renders .secondary-button', () => {
-      const subject = shallow(<IconButton primary={false} />);
+      const subject = shallow(<IconButton name='rocket' primary={false} />);
       expect(subject).to.have.className('secondary-button')
     });
   });
