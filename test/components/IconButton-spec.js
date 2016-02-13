@@ -39,4 +39,11 @@ describe('<IconButton />', () => {
       expect(subject).to.contain(<FontAwesome name='hourglass-half' />);
     });
   });
+
+  describe('size', () => {
+    it('renders size attributes', () => {
+      const subject = shallow(<IconButton icon='rocket' size='4x' />);
+      expect(subject).to.contain(<FontAwesome name='rocket' size='4x' />);
+    });
+  });
 });

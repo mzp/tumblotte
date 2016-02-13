@@ -8,7 +8,8 @@ import postsActions from '../actions/posts';
 import Sidebar from '../components/Sidebar';
 import Editor from '../components/Editor';
 import Preview from '../components/Preview';
-import Login from '../components/Login';
+import Login from './pages/Login';
+import Authenticate from './pages/Authenticate';
 import menu from '../electron/MainMenu';
 import { Blog, User } from '../gateway/tumblr';
 
@@ -95,19 +96,16 @@ class App extends React.Component {
     }
   }
 
-  login() {
-    const { authenticate, loading, dispatch } = this.props;
-    const actions = bindActionCreators(authenticateActions, dispatch);
-    return (
-      <Login authenticate={authenticate}
-        authorize={this.loading('authorize', actions.authorize)}
-        loading={loading}
-        getAccessToken={actions.getAccessToken} />);
-  }
-
   render() {
     const { authenticate } = this.props;
-    return authenticate.isAuthenticated ? this.editor() : this.login();
+
+    if(authenticate.isAuthenticated) {
+      return this.editor();
+    } else if(authenticate.authorizeUrl) {
+      return <Authenticate />;
+    } else {
+      return <Login />;
+    }
   }
 }
 

@@ -47,6 +47,7 @@
     "electron-prebuilt": "^0.36.2",
     "font-awesome": "^4.5.0",
     "lodash.debounce": "^3.1.1",
+    "lodash.mapvalues": "^4.1.0",
     "lodash.max": "^3.4.0",
     "lodash.topairs": "^4.0.0",
     "marked": "^0.3.5",
