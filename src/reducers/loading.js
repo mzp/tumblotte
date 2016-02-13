@@ -13,6 +13,10 @@ export default handleActions({
     return { ...state, fetch: false };
   },
 
+  FETCH_BLOGS: (state, action) => {
+    return { ...state, fetch: false };
+  },
+
   POST: (state, action) => {
     return { ...state, post: false };
   },

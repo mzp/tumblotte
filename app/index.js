@@ -35,6 +35,7 @@ function createWindow() {
 
   mainWindow = new BrowserWindow({width: 1024, height: 600});
   mainWindow.loadURL('file://' + __dirname + '/index.html');
+mainWindow.toggleDevTools();
 
   mainWindow.on('closed', function() {
     mainWindow = null;

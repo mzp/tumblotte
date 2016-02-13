@@ -1,7 +1,7 @@
 import IconButton from '../../components/IconButton';
 import React from 'react';
 import actions from '../../actions/authenticate';
-import { connectWithLoading } from '../concerns/connect';
+import { connect } from '../concerns/connect';
 
 const template = require('react-jade').compileFile(__dirname + '/Login.jade');
 
@@ -16,4 +16,4 @@ export class Login extends React.Component {
   }
 }
 
-export default connectWithLoading(actions)(Login);
+export default connect(actions, { loading: true })(Login);

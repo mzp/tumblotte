@@ -1,0 +1,22 @@
+#layout
+  #list.sidebar
+    .sidebar__nav
+      .sidebar__blogs
+        SelectBox(onSelect=blogAction.select, items=blogs)
+      .sidebar__actions
+        IconButton(icon='file-o', primary=true, onClick=createPost)
+        IconButton(icon='trash-o', onClick=removePost)
+        IconButton(icon='refresh', loading=loading.fetch, onClick=fetchPosts)
+    .sidebar__items
+      each post in posts
+        SidebarItem(key=post.id, onClick=postAction.select.bind(this, post))&attributes(post)
+  #main.pure-g
+    if post
+      #editor.pure-u-1-2.editor.pure-form
+        DebounceTextArea.editor__text(contentId=post.id, content=post.content, onChange=changeText.bind(this, post))
+        .editor__nav
+          IconButton(primary=true, icon='rocket', onClick=postAction.post.bind(this, tumblr, post))
+
+          if post.isPosted
+            IconButton(icon='external-link', onClick=openLink.bind(this, post))
+      Preview(title=post.title, body=post.body, onLinkClick=openExternal)

@@ -9,13 +9,13 @@ describe('<Login />', () => {
   describe('sign-in button', () => {
     it('renders sign-in icon', () => {
       const subject = shallow(<Login loading={{ authorize: false }} />);
-      expect(subject.find(IconButton)).prop('icon', 'sign-in');
-      expect(subject.find(IconButton)).prop('loading', false);
+      expect(subject.find(IconButton)).to.have.prop('icon', 'sign-in');
+      expect(subject.find(IconButton)).to.have.prop('loading', false);
     });
 
     it('renders loading icon', () => {
       const subject = shallow(<Login loading={{ authorize: true }} />);
-      expect(subject.find(IconButton)).prop('loading', true);
+      expect(subject.find(IconButton)).to.have.prop('loading', true);
     });
   });
 

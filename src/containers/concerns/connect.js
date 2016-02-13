@@ -5,13 +5,8 @@ import loadingActions from '../../actions/loading';
 
 function id(x) { return x };
 
-export function connect(actions) {
-  return reduxConnect(id, (dispatch) => bindActionCreators(actions, dispatch));
-}
-
-function bindLoadingActions(actions, dispatch) {
+function withLoading(dispatch, props) {
   const loadingAction = bindActionCreators(loadingActions, dispatch);
-  const props = bindActionCreators(actions, dispatch);
 
   return mapValues(props, (f, name) => {
     return (...args) => {
@@ -21,6 +16,27 @@ function bindLoadingActions(actions, dispatch) {
   });
 }
 
-export function connectWithLoading(actions) {
-  return reduxConnect(id, (dispatch) => bindLoadingActions(actions, dispatch));
+function raw(_, props) {
+  return props;
+}
+
+function parseOption(option) {
+  const { loading } = option || {};
+  return loading ? withLoading : raw;
+}
+
+export function connect(actions, option) {
+  return reduxConnect(id, (dispatch) => {
+    const wrap = parseOption(option);
+    return wrap(dispatch, bindActionCreators(actions, dispatch));
+  });
+}
+
+export function connectCombine(combineActions, option) {
+  return reduxConnect(id, (dispatch) => {
+    const wrap = parseOption(option);
+    return mapValues(combineActions, (actions) => {
+      return wrap(dispatch, bindActionCreators(actions, dispatch));
+    });
+  });
 }
