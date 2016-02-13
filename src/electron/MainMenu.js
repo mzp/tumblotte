@@ -1,18 +1,25 @@
 // electronのrequireを使いたいので、globalをつけて
 // browserifyされるのを回避する。
-const remote = global.require('remote');
-
-const Menu = remote.require('menu');
-const app = remote.require('app');
-const mainWindow = remote.getCurrentWindow();
-
 function setMenu(template) {
+  const remote = global.require('remote');
+  const Menu = remote.require('menu');
   const menu = Menu.buildFromTemplate(template);
   Menu.setApplicationMenu(menu);
 }
 
-export default function(actions, store, tumblr) {
-  const authenticated = store.getState().authenticate.isAuthenticated;
+function fetch(name, options = {}) {
+  if(options[name]) {
+    return { enabled: true, click: options[name] }
+  } else {
+    return { enabled: false }
+  }
+}
+
+export default function(options) {
+  const remote = global.require('remote');
+
+  const app = remote.require('app');
+  const mainWindow = remote.getCurrentWindow();
 
   const main = [
     { label: 'About Tumblotte', role: 'about' },
@@ -27,33 +34,11 @@ export default function(actions, store, tumblr) {
   ];
 
   const file = [
-    { label: 'New', accelerator: 'Command+N', enabled: authenticated,
-      click: () => {
-        const { blogs } = store.getState();
-        const blog = blogs.find((blog) => blog.selected);
-
-        if(blog) {
-          actions.posts.create(blog.name);
-        }
-      } },
-    { label: 'Fetch', enabled: authenticated,
-      click: () => {
-        actions.loading.start('fetch');
-        actions.posts.fetch(tumblr);
-      } },
-    { label: 'Post/Update', accelerator: 'Command+U', enabled: authenticated,
-      click: () => {
-        const { posts } = store.getState();
-        posts.forEach((post) => {
-          if (post.selected) {
-            actions.loading.start('post');
-            actions.posts.post(tumblr, post);
-          }
-        });
-      } },
+    { label: 'New', accelerator: 'Command+N', ...fetch('create', options) },
+    { label: 'Fetch', ...fetch('fetch', options) },
+    { label: 'Post/Update', accelerator: 'Command+U', ...fetch('post', options) },
     { type: 'separator' },
-    { label: 'Logout', enabled: authenticated,
-      click: () => { actions.authenticate.logout(); } }
+    { label: 'Logout', ...fetch('logout', options) }
   ];
 
   const edit  = [

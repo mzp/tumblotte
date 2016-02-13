@@ -5,10 +5,12 @@ import IconButton from '../../components/IconButton';
 import Preview from '../../components/Preview';
 import SelectBox from '../../components/SelectBox';
 import SidebarItem from '../../components/SidebarItem';
+import authenticateAction from '../../actions/authenticate';
 import blogAction from '../../actions/blogs';
 import postAction from '../../actions/posts';
 import { connectCombine } from '../concerns/connect';
 import { Blog, User } from '../../gateway/tumblr';
+import menu from '../../electron/MainMenu';
 
 const template = require('react-jade').compileFile(__dirname + '/Editor.jade');
 
@@ -17,10 +19,24 @@ export class Editor extends React.Component {
   // Life cycle
   // ------------------------------------------------------------
   componentDidMount() {
-    const { authenticate, blogAction } = this.props;
+    const {
+      authenticate,
+      authenticateAction,
+      blogAction,
+      postAction
+    } = this.props;
+
     if(authenticate.isAuthenticated) {
       const user = new User(authenticate.accessToken, authenticate.accessTokenSecret);
       blogAction.fetch(user);
+      menu({
+        create: ::this.createPost,
+        fetch: ::this.fetchPosts,
+        post: () => {
+          postAction.post(this.tumblr(), this.selectedPost())
+        },
+        logout: authenticateAction.logout
+      });
     }
   }
 
@@ -141,7 +157,7 @@ export class Editor extends React.Component {
 }
 
 export default connectCombine({
-  blogAction, postAction
+  authenticateAction, blogAction, postAction
 }, {
   loading: true
 })(Editor);
