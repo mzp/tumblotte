@@ -1,16 +1,13 @@
 import React from 'react';
 import FontAwesome from 'react-fontawesome';
 import SidebarItem from './SidebarItem';
+import IconButton from './IconButton';
+import SelectBox from './SelectBox';
 
 export default class Sidebar extends React.Component {
   componentDidMount() {
     const { onFetchBlogs } = this.props;
     onFetchBlogs();
-  }
-
-  selectBlog(e) {
-    const { onSelectBlog } = this.props;
-    onSelectBlog(e.target.value);
   }
 
   select(post) {
@@ -51,40 +48,28 @@ export default class Sidebar extends React.Component {
       dirty={post.dirty} />
   }
 
-  makeBlog(blog) {
-    return (<option key={blog.name} value={blog.name}>{blog.title}</option>);
-  }
-
   selectedBlog() {
     const { blogs } = this.props;
     return blogs.find((blog) => blog.selected);
   }
 
   render() {
-    const { blogs, loading, posts } = this.props;
-    const blogItems = blogs.map(::this.makeBlog);
+    const { blogs, loading, posts, onSelectBlog } = this.props;
+    const blogItems = blogs.map(({ name, title, selected }) => {
+      return { value: name, title, selected };
+    });
     const blog = this.selectedBlog();
     const items = posts.map(::this.makeItem);
-    const fetchIcon = loading.fetch ? 'hourglass-half' : 'refresh';
 
     return <div id="list" className="sidebar">
       <div className="sidebar__nav">
         <div className="sidebar__blogs">
-          <select onChange={::this.selectBlog} defaultValue={blog && blog.name}>{blogItems}</select>
+          <SelectBox onSelect={onSelectBlog} items={blogItems} />
         </div>
         <div className="sidebar__actions">
-          <button className="primary-button pure-button"
-            onClick={::this.create}>
-            <FontAwesome name='file-o' />
-          </button>
-          <button className="secondary-button pure-button"
-            onClick={::this.remove}>
-            <FontAwesome name='trash-o' />
-          </button>
-          <button className="secondary-button pure-button"
-            onClick={::this.fetch}>
-            <FontAwesome name={fetchIcon} />
-          </button>
+          <IconButton icon='file-o' primary={true} onClick={::this.create} />
+          <IconButton icon='trash-o' primary={true} onClick={::this.remove} />
+          <IconButton icon='refresh' loading={loading.fetch} onClick={::this.fetch} />
         </div>
       </div>
       <div className='sidebar__items'>
