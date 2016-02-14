@@ -1,9 +1,28 @@
 import reducer from 'reducers/authenticate';
-import Authenticate from 'values/Authenticate';
 import { expect } from 'chai';
 
 describe('authenticate reducer', () => {
-  const init = new Authenticate({}).init();
+  const init = {};
+
+  describe('INIT', () => {
+    const state = {
+      authorizeUrl: 'htpp://example.com',
+      accessToken: 'access token'
+    };
+
+    [ '@@INIT', '@@redux/INIT'].forEach((type) => {
+      describe(type, () => {
+        const next = reducer(state, { type });
+        it('forgets authorizeUrl', () => {
+          expect(next.authorizeUrl).to.be.null;
+        });
+
+        it('preserves accessToken', () => {
+          expect(next.accessToken).to.equal('access token');
+        });
+      });
+    });
+  });
 
   describe('AUTHORIZE', () => {
     const next = reducer(init, {

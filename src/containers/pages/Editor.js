@@ -26,18 +26,16 @@ export class Editor extends React.Component {
       postAction
     } = this.props;
 
-    if(authenticate.isAuthenticated) {
-      const user = new User(authenticate.accessToken, authenticate.accessTokenSecret);
-      blogAction.fetch(user);
-      menu({
-        create: ::this.createPost,
-        fetch: ::this.fetchPosts,
-        post: () => {
-          postAction.post(this.tumblr(), this.selectedPost())
-        },
-        logout: authenticateAction.logout
-      });
-    }
+    const user = new User(authenticate.accessToken, authenticate.accessTokenSecret);
+    blogAction.fetch(user);
+    menu({
+      create: ::this.createPost,
+      fetch: ::this.fetchPosts,
+      post: () => {
+        postAction.post(this.tumblr(), this.selectedPost())
+      },
+      logout: authenticateAction.logout
+    });
   }
 
   render() {

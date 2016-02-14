@@ -24,7 +24,7 @@ describe('<App />', () => {
   });
 
   describe('<Editor />', () => {
-    const subject = shallow(<App authenticate={{ isAuthenticated: true }} />);
+    const subject = shallow(<App authenticate={{ accessToken: 'access token' }} />);
     it('renders <Editor />', () =>{
       expect(subject.find(Editor)).to.contain(<Editor />);
     });

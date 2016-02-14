@@ -8,7 +8,7 @@ export class App extends React.Component {
   render() {
     const { authenticate } = this.props;
 
-    if(authenticate.isAuthenticated) {
+    if(authenticate.accessToken) {
       return <Editor />;
     } else if(authenticate.authorizeUrl) {
       return <Authenticate />;
