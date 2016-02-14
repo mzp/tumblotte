@@ -45,6 +45,7 @@ export class Editor extends React.Component {
       tumblr: this.tumblr(),
       loading: this.props.loading,
       post: this.selectedPost(),
+      currentBlog: this.selectedBlog(),
       ...this.components(),
       ...this.actions()
     });
@@ -109,7 +110,6 @@ export class Editor extends React.Component {
     return {
       blogAction,
       postAction,
-      createPost: ::this.createPost,
       removePost: ::this.removePost,
       fetchPosts: ::this.fetchPosts,
       changeText: ::this.changeText,
@@ -121,12 +121,6 @@ export class Editor extends React.Component {
   changeText(post, event) {
     const { postAction } = this.props;
     postAction.change({ post, value: event.target.value });
-  }
-
-  createPost() {
-    const { postAction } = this.props;
-    const { name } = this.selectedBlog();
-    postAction.create({ blogName: name });
   }
 
   removePost() {

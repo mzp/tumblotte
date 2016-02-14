@@ -4,10 +4,14 @@ import { mock } from 'sinon';
 
 describe('posts', () => {
   describe('create', () => {
-    const action = actions.create();
+    const action = actions.create('foo');
 
     it('has CREATE type', () => {
       expect(action.type).to.equal('CREATE');
+    });
+
+    it('has blogName payload', () => {
+      expect(action.payload.blogName).to.equal('foo');
     });
   });
 

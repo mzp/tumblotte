@@ -45,7 +45,7 @@ describe('<Editor /> - BlogAction', () => {
 
     it('calls action', () => {
       button.simulate('click');
-      expect(postAction.create.calledWith({ blogName: 'snake' })).to.equal(true);
+      expect(postAction.create.calledWith('snake')).to.equal(true);
     });
   });
 

@@ -1,7 +1,9 @@
 import { createAction } from 'redux-actions';
 
 export default {
-  create: createAction('CREATE'),
+  create: createAction('CREATE', (name) => {
+    return { blogName: name };
+  }),
   select: createAction('SELECT'),
   change: createAction('CHANGE'),
   remove: createAction('REMOVE'),
