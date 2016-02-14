@@ -27,7 +27,6 @@
     "chai": "^3.5.0",
     "chai-as-promised": "^5.2.0",
     "chai-enzyme": "^0.4.0",
-    "electron-packager": "^5.2.0",
     "enzyme": "^1.6.0",
     "gulp": "^3.9.0",
     "gulp-livereload": "^3.8.1",
@@ -36,7 +35,6 @@
     "gulp-sourcemaps": "^1.6.0",
     "gulp-stylus": "^2.2.0",
     "mocha": "^2.4.5",
-    "node-font-awesome": "^1.0.2",
     "react-addons-test-utils": "^0.14.7",
     "redux-devtools": "^3.0.1",
     "redux-devtools-dock-monitor": "^1.0.1",
@@ -46,8 +44,8 @@
   },
   "dependencies": {
     "dexie": "^1.2.0",
-    "electron-prebuilt": "^0.36.2",
     "font-awesome": "^4.5.0",
+    "node-font-awesome": "^1.0.2",
     "lodash.debounce": "^3.1.1",
     "lodash.mapvalues": "^4.1.0",
     "lodash.max": "^3.4.0",
@@ -68,6 +66,8 @@
     "tumblr": "mzp/node-tumblr"
   },
   "optionalDependencies": {
+    "electron-packager": "^5.2.0",
+    "electron-prebuilt": "^0.36.2",
     "gulp-appdmg": "^1.0.2"
   }
 }
