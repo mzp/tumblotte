@@ -1,12 +1,10 @@
 var gulp = require('gulp');
 
-var appdmg = require('gulp-appdmg');
 var babelify = require('babelify');
 var browserify = require('browserify');
 var fontAwesome = require('node-font-awesome');
 var livereload = require('gulp-livereload');
 var mocha = require('gulp-mocha');
-var packager = require('electron-packager');
 var react_jade = require('react-jade');
 var source = require( 'vinyl-source-stream' );
 var sourcemaps = require('gulp-sourcemaps');
@@ -76,24 +74,26 @@ gulp.task('test', function() {
 // Package
 // ============================================================
 gulp.task('package', ['build:css', 'build:font', 'build:js:release'], function(done) {
- packager({
-   'app-bundle-id': 'jp.mzp.tumblotte',
-   'app-version': '0.1.0',
-   arch: 'x64',
-   dir: 'app',
-   icon: 'assets/icons/icon.icns',
-   name: 'Tumblotte',
-   out: 'package',
-   overwrite: true,
-   platform: 'darwin',
-   sign: 'Developer ID Application: HIROKI MIZUNO (VG2YYSKSHY)',
-   version: '0.36.2',
- }, function (err, path) {
-   done();
- });
+  var packager = require('electron-packager');
+  packager({
+    'app-bundle-id': 'jp.mzp.tumblotte',
+    'app-version': '0.1.0',
+    arch: 'x64',
+    dir: 'app',
+    icon: 'assets/icons/icon.icns',
+    name: 'Tumblotte',
+    out: 'package',
+    overwrite: true,
+    platform: 'darwin',
+    sign: 'Developer ID Application: HIROKI MIZUNO (VG2YYSKSHY)',
+    version: '0.36.2'
+  }, function (err, path) {
+    done();
+  });
 });
 
 gulp.task('dmg', ['package'], function() {
+  var appdmg = require('gulp-appdmg');
   function pad(n){return n<10 ? '0'+n : n.toString(); }
   var date = new Date();
   var name = pad(date.getFullYear())
