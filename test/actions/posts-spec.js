@@ -53,7 +53,7 @@ describe('posts', () => {
 
       it('calls Tumblr#create', () => {
          m.expects("create").withArgs(post.title, post.body).returns(Promise.resolve(''));
-         const action = actions.post(tumblr, post);
+         actions.post(tumblr, post);
          m.verify();
       });
 
@@ -79,7 +79,7 @@ describe('posts', () => {
 
       it('calls Tumblr#create', () => {
          m.expects("edit").withArgs(42, post.title, post.body).returns(Promise.resolve(''));
-         const action = actions.post(tumblr, { tumblrId: 42, ...post });
+         actions.post(tumblr, { tumblrId: 42, ...post });
          m.verify();
       });
 
@@ -116,7 +116,7 @@ describe('posts', () => {
     it('call TumblrBlog#fetch', () => {
       const m = mock(tumblrBlog);
       m.expects("fetch").withArgs(10).returns(Promise.resolve(''));
-      const action = actions.fetch(tumblrBlog);
+      actions.fetch(tumblrBlog);
       m.verify();
     });
 

@@ -102,7 +102,7 @@ describe('posts reducer', () => {
 
     it('updates post', () => {
       expect(next[0]).to.include({
-        dirty: false,
+        dirty: false
       });
     });
   });

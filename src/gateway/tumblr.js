@@ -91,7 +91,7 @@ export class Blog {
     };
 
     return new Promise((resolve, reject) => {
-      this.blog.post(opts, (error, response) => {
+      this.blog.post(opts, (error) => {
         if (error) {
           reject(error);
         } else {
@@ -110,7 +110,7 @@ export class Blog {
     };
 
     return new Promise((resolve, reject) => {
-      this.blog.edit(opts, (error, response) => {
+      this.blog.edit(opts, (error) => {
         if (error) {
           reject(error);
         } else {

@@ -67,7 +67,7 @@ describe('authenticate reducer', () => {
 
   describe('LOGOUT', () => {
     const next = reducer({ accessToken: '', accessTokenSecret: '' }, {
-      type: 'LOGOUT',
+      type: 'LOGOUT'
     });
     it('becomes empty', () => {
       expect(next.accessToken).to.be.undefined;

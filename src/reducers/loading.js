@@ -5,23 +5,23 @@ export default handleActions({
     return { ...state, [action.payload]: true };
   },
 
-  AUTHORIZE: (state, action) => {
+  AUTHORIZE: (state) => {
     return { ...state, authorize: false };
   },
 
-  FETCH: (state, action) => {
+  FETCH: (state) => {
     return { ...state, fetch: false };
   },
 
-  FETCH_BLOGS: (state, action) => {
+  FETCH_BLOGS: (state) => {
     return { ...state, fetch: false };
   },
 
-  POST: (state, action) => {
+  POST: (state) => {
     return { ...state, post: false };
   },
 
-  EDIT: (state, actions) => {
+  EDIT: (state) => {
     return { ...state, post: false };
   }
 }, {});

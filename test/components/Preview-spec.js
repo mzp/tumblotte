@@ -1,7 +1,7 @@
 import Preview from 'components/Preview';
 import React from 'react';
 import { expect } from 'chai';
-import { render, mount, shallow } from 'enzyme';
+import { render, shallow } from 'enzyme';
 
 describe('<Preview />', () => {
   context('without post', () => {

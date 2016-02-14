@@ -30,5 +30,5 @@ export default handleActions({
     return blogs;
   },
 
-  LOGOUT: (state, action) => []
+  LOGOUT: () => []
 }, []);

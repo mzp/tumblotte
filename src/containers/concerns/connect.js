@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import mapValues from 'lodash.mapvalues';
 import loadingActions from '../../actions/loading';
 
-function id(x) { return x };
+function id(x) { return x }
 
 function withLoading(dispatch, props) {
   const loadingAction = bindActionCreators(loadingActions, dispatch);

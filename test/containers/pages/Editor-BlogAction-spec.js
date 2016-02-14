@@ -13,7 +13,7 @@ describe('<Editor /> - BlogAction', () => {
   const authenticate = {};
   const posts = [
     { id: 1, content: 'baz', selected: true },
-    { id: 2, content: 'xxx', selected: false },
+    { id: 2, content: 'xxx', selected: false }
   ];
   const loading = {
     fetch: true

@@ -19,7 +19,7 @@ describe('<Editor /> - Items', () => {
  };
  const posts = [
    post,
-   { id: 2, content: 'xxx', selected: false },
+   { id: 2, content: 'xxx', selected: false }
  ];
  const loading = {};
 

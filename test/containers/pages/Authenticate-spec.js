@@ -1,9 +1,7 @@
 import { Authenticate } from 'containers/pages/Authenticate';
-import IconButton from 'components/IconButton';
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import { spy } from 'sinon';
 
 describe('<Authenticate />', () => {
   const authenticate = {

@@ -1,11 +1,11 @@
 import { handleActions } from 'redux-actions';
 
 export default handleActions({
-  '@@INIT': (state, action) => {
+  '@@INIT': (state) => {
     return { ...state, authorizeUrl: null, requestToken: null, requestTokenSecret: null };
   },
 
-  '@@redux/INIT': (state, action) => {
+  '@@redux/INIT': (state) => {
     return { ...state, authorizeUrl: null, requestToken: null, requestTokenSecret: null };
   },
 
@@ -19,5 +19,5 @@ export default handleActions({
     return { ...state, accessToken, accessTokenSecret };
   },
 
-  LOGOUT: (state, action) => { return {}; }
+  LOGOUT: () => { return {}; }
 }, {});

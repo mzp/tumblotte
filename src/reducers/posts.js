@@ -1,5 +1,4 @@
 import { handleActions } from 'redux-actions';
-import max from 'lodash.max';
 import uuid from 'node-uuid';
 
 function updateWith(state, post, f) {
@@ -23,10 +22,10 @@ function selectFirst(xs) {
 }
 
 export default handleActions({
-  '@@INIT': (state, action) =>
+  '@@INIT': (state) =>
     selectFirst(state),
 
-  '@@redux/INIT': (state, action) =>
+  '@@redux/INIT': (state) =>
     selectFirst(state),
 
   CREATE: (state, action) => {
@@ -69,7 +68,7 @@ export default handleActions({
   },
 
   EDIT: (state, action) => {
-    const { post, response } = action.payload;
+    const { post } = action.payload;
     return updateWith(state, post, (x) => {
       return { ...x, dirty: false };
     });
@@ -105,5 +104,5 @@ export default handleActions({
     return posts;
   },
 
-  LOGOUT: (state, action) => []
+  LOGOUT: () => []
 }, []);

@@ -16,7 +16,7 @@ export class Login extends React.Component {
     return template({
       authorize: authorize,
       loading: loading.authorize,
-      IconButton,
+      IconButton
     });
   }
 }
