@@ -11,6 +11,9 @@ var source = require( 'vinyl-source-stream' );
 var sourcemaps = require('gulp-sourcemaps');
 var stylus = require('gulp-stylus');
 
+// ============================================================
+// Build
+// ============================================================
 function compile(debug) {
   browserify({ entries: ['src/main.js'], debug: debug })
     .transform(babelify, {
@@ -28,17 +31,6 @@ gulp.task('build:js', function() {
 
 gulp.task('build:js:release', function() {
   compile(false);
-});
-
-gulp.task('test', function() {
-  gulp.src(['test/**/*.js'], { read: false })
-    .pipe(mocha({
-      reporter: 'nyan',
-      require: 'test/bootstrap',
-      compilers: {
-        js: require('babel-core/register')
-      }
-    }));
 });
 
 gulp.task('build:font', function () {
@@ -60,6 +52,27 @@ gulp.task('build:css', function () {
     .pipe(gulp.dest('./app/css'));
 });
 
+gulp.task('build', ['build:css', 'build:font', 'build:js']);
+gulp.task('default', ['build']);
+
+// ============================================================
+// Test
+// ============================================================
+gulp.task('test', function() {
+  gulp.src(['test/**/*.js'], { read: false })
+    .pipe(mocha({
+      reporter: 'nyan',
+      require: 'test/bootstrap',
+      compilers: {
+        js: require('babel-core/register')
+      }
+    }))
+    .on('error', console.log);;
+});
+
+// ============================================================
+// Package
+// ============================================================
 gulp.task('package', ['build:css', 'build:font', 'build:js:release'], function(done) {
  packager({
    'app-bundle-id': 'jp.mzp.tumblotte',
@@ -92,5 +105,15 @@ gulp.task('dmg', ['package'], function() {
     }));
 });
 
-gulp.task('build', ['build:css', 'build:font', 'build:js']);
-gulp.task('default', ['build']);
+// ============================================================
+// Watch
+// ============================================================
+gulp.task('watch:src', function(){
+  gulp.watch('./src/**/*.js', ['build:js']);
+  gulp.watch('./assets/stylesheets/*.styl', ['build:css']);
+});
+
+gulp.task('watch:test', function(){
+  gulp.watch('./src/**/*.js', ['test']);
+  gulp.watch('./test/**/*.js', ['test']);
+});
