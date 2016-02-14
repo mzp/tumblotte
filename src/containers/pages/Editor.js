@@ -29,7 +29,7 @@ export class Editor extends React.Component {
     const user = new User(authenticate.accessToken, authenticate.accessTokenSecret);
     blogAction.fetch(user);
     menu({
-      create: ::this.createPost,
+      create: postAction.create,
       fetch: ::this.fetchPosts,
       post: () => {
         postAction.post(this.tumblr(), this.selectedPost())
@@ -109,7 +109,6 @@ export class Editor extends React.Component {
     return {
       blogAction,
       postAction,
-      createPost: ::this.createPost,
       removePost: ::this.removePost,
       fetchPosts: ::this.fetchPosts,
       changeText: ::this.changeText,
@@ -121,12 +120,6 @@ export class Editor extends React.Component {
   changeText(post, event) {
     const { postAction } = this.props;
     postAction.change({ post, value: event.target.value });
-  }
-
-  createPost() {
-    const { postAction } = this.props;
-    const { name } = this.selectedBlog();
-    postAction.create({ blogName: name });
   }
 
   removePost() {

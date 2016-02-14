@@ -17,8 +17,7 @@ describe('posts reducer', () => {
 
   describe('CREATE', () => {
     const next = reducer([], {
-      type: 'CREATE',
-      payload: { blogName: 'snake oil' }
+      type: 'CREATE'
     });
 
     it('creates new post', () => {
@@ -27,7 +26,6 @@ describe('posts reducer', () => {
 
     it('creates new post', () => {
       expect(next[0]).to.include({
-        blogName: 'snake oil',
         dirty: true,
         selected: true
       });

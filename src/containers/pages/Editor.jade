@@ -4,7 +4,7 @@
       .sidebar__blogs
         SelectBox(onSelect=blogAction.select, items=blogs)
       .sidebar__actions
-        IconButton(icon='file-o', primary=true, onClick=createPost)
+        IconButton(icon='file-o', primary=true, onClick=postAction.create)
         IconButton(icon='trash-o', onClick=removePost)
         IconButton(icon='refresh', loading=loading.fetch, onClick=fetchPosts)
     .sidebar__items

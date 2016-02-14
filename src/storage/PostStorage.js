@@ -26,13 +26,13 @@ export default {
     const ids = posts.map((x) => x.id);
 
     const puts =
-      posts.map((post) => db().posts.put(post));
+      posts.map((post) => db().posts.put({ ...post, blogName }));
 
     const deletes =
       db().posts
         .where('blogName')
         .equals(blogName)
-        .and((post) => ids.indexOf(post.id) === -1)
+        .and((post) => !ids.includes(post.id))
         .delete();
 
     return Promise.all(puts).then(() => deletes);

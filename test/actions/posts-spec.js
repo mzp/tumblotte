@@ -4,7 +4,7 @@ import { mock } from 'sinon';
 
 describe('posts', () => {
   describe('create', () => {
-    const action = actions.create();
+    const action = actions.create('foo');
 
     it('has CREATE type', () => {
       expect(action.type).to.equal('CREATE');

@@ -28,13 +28,12 @@ export default handleActions({
   '@@redux/INIT': (state) =>
     selectFirst(state),
 
-  CREATE: (state, action) => {
+  CREATE: (state) => {
     const id = uuid.v1();
-    const { blogName } = action.payload;
 
     return [
       {
-        id, blogName,
+        id,
         content: 'new post\n\nwrite here...',
         dirty: true,
         selected: true
