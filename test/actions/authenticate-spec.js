@@ -23,9 +23,11 @@ describe('authenticate', () => {
   describe('getAccessToken', () => {
     let getAccessToken = stub();
     Tumblr.getAccessToken = getAccessToken;
-    getAccessToken.returns(Promise.resolve('access token'));
+    getAccessToken
+      .withArgs('request token', 'request token secret', 'verifier')
+      .returns(Promise.resolve('access token'));
 
-    const action = actions.getAccessToken();
+    const action = actions.getAccessToken('request token', 'request token secret', 'verifier');
 
     it('has AUTHORIZE type', () => {
       expect(action.type).to.equal('ACCESS_TOKEN');

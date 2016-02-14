@@ -2,7 +2,7 @@ import { createAction } from 'redux-actions';
 import Tumblr from '../gateway/tumblr';
 
 export default {
-  authorize: createAction('AUTHORIZE', () => Tumblr.getRequestToken()),
-  getAccessToken: createAction('ACCESS_TOKEN', () => Tumblr.getAccessToken()),
+  authorize: createAction('AUTHORIZE', (...args) => Tumblr.getRequestToken(...args)),
+  getAccessToken: createAction('ACCESS_TOKEN', (...args) => Tumblr.getAccessToken(...args)),
   logout: createAction('LOGOUT')
 };
