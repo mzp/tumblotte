@@ -28,7 +28,7 @@
     "chai-as-promised": "^5.2.0",
     "chai-enzyme": "^0.4.0",
     "electron-packager": "^5.2.0",
-    "enzyme": "^2.0.0",
+    "enzyme": "^1.6.0",
     "gulp": "^3.9.0",
     "gulp-livereload": "^3.8.1",
     "gulp-mocha": "^2.2.0",
