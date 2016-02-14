@@ -1,7 +1,5 @@
-// import React from 'react';
+import React from 'react';
 import { render } from 'react-dom';
-global.env = 'development';
-
 import configureStore from './store/configureStore';
 import Root from './containers/Root';
 

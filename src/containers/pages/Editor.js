@@ -40,7 +40,7 @@ export class Editor extends React.Component {
 
   render() {
     return template({
-      blogs: this.blogs(),
+      blogs: this.props.blogs,
       posts: this.posts(),
       tumblr: this.tumblr(),
       loading: this.props.loading,
@@ -66,12 +66,6 @@ export class Editor extends React.Component {
   // ------------------------------------------------------------
   // stores
   // ------------------------------------------------------------
-  blogs() {
-    return this.props.blogs.map(({ name, title, selected }) => {
-      return { value: name, title, selected };
-    });
-  }
-
   parsePost(post) {
     if(post && post.content) {
       const [title] = post.content.split('\n', 1);

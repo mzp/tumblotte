@@ -9,7 +9,7 @@ export default class SelectBox extends React.Component {
 
   render() {
     const { items } = this.props;
-    const defaultValue = (items.find((x) => x.selected) || {}).value;
+    const defaultValue = (items.find((x) => x.selected) || {}).name;
     return template({ defaultValue, items, onChange: ::this.onChange });
   }
 }

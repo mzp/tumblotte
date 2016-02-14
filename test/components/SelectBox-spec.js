@@ -7,9 +7,9 @@ import { spy } from 'sinon';
 describe('<SelectBox />', () => {
   describe('defaultValue', () => {
     const items = [
-      { value: 'foo', title: 'Foo' },
-      { value: 'bar', title: 'Bar', selected: true },
-      { value: 'baz', title: 'Baz' }
+      { name: 'foo', title: 'Foo' },
+      { name: 'bar', title: 'Bar', selected: true },
+      { name: 'baz', title: 'Baz' }
     ];
     const subject = render(<SelectBox items={items} />);
     it('renders defaultValue', () => {
@@ -19,9 +19,9 @@ describe('<SelectBox />', () => {
 
   describe('<option />', () => {
     const items = [
-      { value: 'foo', title: 'Foo' },
-      { value: 'bar', title: 'Bar' },
-      { value: 'baz', title: 'Baz' }
+      { name: 'foo', title: 'Foo' },
+      { name: 'bar', title: 'Bar' },
+      { name: 'baz', title: 'Baz' }
     ];
     const subject = shallow(<SelectBox items={items} />);
 
