@@ -1,7 +1,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import { spy } from 'sinon';
+import { spy, match } from 'sinon';
 
 import { Editor } from 'containers/pages/Editor';
 import DebounceTextArea from 'components/DebounceTextArea';
@@ -71,7 +71,10 @@ describe('<Editor /> - Edit', () => {
 
      it('calls action', () => {
        textarea.simulate('change', { target: { value: 'xyzzy' } });
-       expect(postAction.change.calledWith({ post, value: 'xyzzy' })).to.equal(true);
+       expect(postAction.change.calledWith(match({
+         value: 'xyzzy',
+         post: match({ id: 1 })
+       }))).to.equal(true);
      });
    });
 
@@ -99,7 +102,7 @@ describe('<Editor /> - Edit', () => {
    const subject = shallow(<Editor
        authenticate={authenticate}
        blogs={blogs}
-       posts={[{ isPosted:true, ...post }]}
+       posts={[{ tumblrId:42, ...post }]}
        loading={loading}
        blogAction={blogAction}
        postAction={postAction} />);

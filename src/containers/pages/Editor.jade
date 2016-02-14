@@ -17,6 +17,6 @@
         .editor__nav
           IconButton(primary=true, icon='rocket', onClick=postAction.post.bind(this, tumblr, post))
 
-          if post.isPosted
+          if post.tumblrId
             IconButton(icon='external-link', onClick=openLink.bind(this, post))
       Preview(title=post.title, body=post.body, onLinkClick=openExternal)

@@ -1,5 +1,4 @@
 import { handleActions } from 'redux-actions';
-import Post from '../values/Post';
 import max from 'lodash.max';
 import uuid from 'node-uuid';
 
@@ -13,31 +12,35 @@ function updateWith(state, post, f) {
   });
 }
 
+function unselect(x) {
+  return { ...x, selected: false };
+}
+
 function selectFirst(xs) {
-  return xs.map((x, i) => i == 0 ? x.select() : x);
+  return xs.map((x, i) => {
+    return { ...x, selected: i == 0 }
+  })
 }
 
 export default handleActions({
   '@@INIT': (state, action) =>
-    selectFirst(state.map((post) =>
-      new Post({ ...post, selected: false }))),
+    selectFirst(state),
 
   '@@redux/INIT': (state, action) =>
-    selectFirst(state.map((post) =>
-      new Post({ ...post, selected: false }))),
+    selectFirst(state),
 
   CREATE: (state, action) => {
     const id = uuid.v1();
     const { blogName } = action.payload;
 
     return [
-      new Post({
+      {
         id, blogName,
         content: 'new post\n\nwrite here...',
         dirty: true,
         selected: true
-      }),
-      ...state.map((x) => x.unselect())
+      },
+      ...state.map(unselect)
     ];
   },
 
@@ -47,27 +50,29 @@ export default handleActions({
 
   SELECT: (state, action) => {
     return state.map((post) => {
-      if (post.id == action.payload.id) {
-        return post.select()
-      } else {
-        return post.unselect()
-      }
+      return { ...post, selected: post.id == action.payload.id };
     });
   },
 
   CHANGE: (state, action) => {
     const { post, value } = action.payload;
-    return updateWith(state, post, (x) => x.change(value))
+    return updateWith(state, post, (x) => {
+      return { ...x, content: value, dirty: true }
+    });
   },
 
   POST: (state, action) => {
     const { post, response } = action.payload;
-    return updateWith(state, post, (x) => x.post(response.id))
+    return updateWith(state, post, (x) => {
+      return { ...x, tumblrId: response.id, dirty: false }
+    });
   },
 
   EDIT: (state, action) => {
     const { post, response } = action.payload;
-    return updateWith(state, post, (x) => x.published())
+    return updateWith(state, post, (x) => {
+      return { ...x, dirty: false };
+    });
   },
 
   FETCH: (state, action) => {
@@ -76,7 +81,7 @@ export default handleActions({
       const { id, title, body, date } = post;
       const old = state.find((x) => x.tumblrId === id);
 
-      return new Post({
+      return {
         id: old ? old.id : uuid.v1(),
         blogName,
         tumblrId: id,
@@ -84,7 +89,7 @@ export default handleActions({
         createdAt: new Date(date),
         selected: old ? old.selected : false,
         dirty: false
-      });
+      };
     });
 
     const remainPosts = state.filter((old) => {

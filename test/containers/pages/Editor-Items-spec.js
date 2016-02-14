@@ -1,7 +1,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import { spy } from 'sinon';
+import { spy, match } from 'sinon';
 
 import { Editor } from 'containers/pages/Editor';
 import SidebarItem from 'components/SidebarItem';
@@ -13,9 +13,7 @@ describe('<Editor /> - Items', () => {
  const authenticate = {};
  const post = {
    id: 1,
-   title: 'thanks',
-   body: 'fish',
-   content: 'baz',
+   content: 'thanks\n\nfish',
    selected: true,
    dirty: true
  };
@@ -53,7 +51,7 @@ describe('<Editor /> - Items', () => {
    });
 
    it('passes #body', () => {
-     expect(item).to.have.prop('body', 'fish');
+     expect(item).to.have.prop('body', '\n\nfish');
    });
 
    it('passes #selected', () => {
@@ -66,7 +64,7 @@ describe('<Editor /> - Items', () => {
 
    it('calls action', () => {
      item.simulate('click');
-     expect(postAction.select.calledWith(post)).to.equal(true);
+     expect(postAction.select.calledWith(match({ id: 1 }))).to.equal(true);
    });
  });
 });

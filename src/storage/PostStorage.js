@@ -1,5 +1,4 @@
 import Dexie from 'dexie';
-import Post from '../values/Post';
 
 function db() {
   const db = new Dexie("Posts");
@@ -18,9 +17,8 @@ export default {
       .equals(blogName)
       .sortBy('createdAt')
       .then((xs) => {
-        const ys = xs.map((x) => new Post(x));
-        ys.reverse();
-        return Promise.resolve(ys);
+        xs.reverse();
+        return Promise.resolve(xs);
       });
   },
 

@@ -72,10 +72,18 @@ export class Editor extends React.Component {
     });
   }
 
+  parsePost(post) {
+    if(post && post.content) {
+      const [title] = post.content.split('\n', 1);
+      const body = post.content.substring(title.length);
+      return { ...post, title, body };
+    } else {
+      return post;
+    }
+  }
+
   posts() {
-    return this.props.posts.map((post) => {
-      return { title: post.title, body: post.body, ...post }
-    });
+    return this.props.posts.map(this.parsePost);
   }
 
   selectedBlog() {
@@ -85,8 +93,7 @@ export class Editor extends React.Component {
 
   selectedPost() {
     const { posts } = this.props;
-    return posts.find((post) => post.selected);
-
+    return this.parsePost(posts.find((post) => post.selected));
   }
 
   tumblr() {
@@ -146,7 +153,7 @@ export class Editor extends React.Component {
   }
 
   openLink(post) {
-    openExternal(this.tumblr().url(post.tumblrId));
+    this.openExternal(this.tumblr().url(post.tumblrId));
   }
 
   openExternal(url) {

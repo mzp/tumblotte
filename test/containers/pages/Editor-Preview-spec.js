@@ -13,9 +13,7 @@ describe('<Editor /> - Edit', () => {
  const authenticate = {};
  const post = {
    id: 1,
-   title: 'thanks',
-   body: 'fish',
-   content: 'baz',
+   content: 'thanks\n\nfish',
    selected: true,
    dirty: true
  };
@@ -61,11 +59,11 @@ describe('<Editor /> - Edit', () => {
      });
 
      it('pass #title', () => {
-       expect(preview).to.have.prop('title', post.title);
+       expect(preview).to.have.prop('title', 'thanks');
      });
 
      it('pass #body', () => {
-       expect(preview).to.have.prop('body', post.body);
+       expect(preview).to.have.prop('body', '\n\nfish');
      });
    });
  });
