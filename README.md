@@ -1,4 +1,7 @@
 # Tumblotte
+
+[![Build Status](https://travis-ci.org/mzp/tumblotte.svg?branch=master)](https://travis-ci.org/mzp/tumblotte)
+
 Markdown editor of Tumblr for MacOS X. 💫
 
 ![screenshot](https://github.com/mzp/tumblotte/raw/master/docs/screenshot.png)
