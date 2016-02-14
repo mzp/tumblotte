@@ -27,7 +27,6 @@ describe('<Editor /> - Blog Select', () => {
       blogAction={blogAction}
       postAction={postAction} />);
 
-  // SelectBox(onSelect=blogAction.select, items=blogs)
   it('renders select box', () => {
     expect(subject.find(SelectBox)).to.have.prop('items').deep.equal([
         { title: 'John Doe Blog', name: 'john', selected: false },
