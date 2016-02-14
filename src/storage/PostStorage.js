@@ -1,4 +1,4 @@
-import Dexie from 'Dexie';
+import Dexie from 'dexie';
 import Post from '../values/Post';
 
 function db() {
