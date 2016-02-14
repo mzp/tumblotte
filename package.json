@@ -34,6 +34,7 @@
     "gulp-sourcemap": "^1.0.1",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-stylus": "^2.2.0",
+    "node-font-awesome": "^1.0.2",
     "mocha": "^2.4.5",
     "react-addons-test-utils": "^0.14.7",
     "redux-devtools": "^3.0.1",
@@ -45,7 +46,6 @@
   "dependencies": {
     "dexie": "^1.2.0",
     "font-awesome": "^4.5.0",
-    "node-font-awesome": "^1.0.2",
     "lodash.debounce": "^3.1.1",
     "lodash.mapvalues": "^4.1.0",
     "lodash.max": "^3.4.0",
