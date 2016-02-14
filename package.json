@@ -6,7 +6,7 @@
   "main": "app/index.js",
   "scripts": {
     "gulp": "gulp",
-    "test": "gulp test",
+    "test": "gulp test:travis",
     "electron": "TUMBLOTTE_ENV=dev electron app/",
     "electron.release": "electron app/"
   },

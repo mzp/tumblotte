@@ -70,6 +70,17 @@ gulp.task('test', function() {
     .on('error', console.log);;
 });
 
+gulp.task('test:travis', function() {
+  gulp.src(['test/**/*.js'], { read: false })
+    .pipe(mocha({
+      require: 'test/bootstrap',
+      compilers: {
+        js: require('babel-core/register')
+      }
+    }));
+});
+
+
 // ============================================================
 // Package
 // ============================================================
