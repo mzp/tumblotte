@@ -6,7 +6,7 @@
   "main": "app/index.js",
   "scripts": {
     "gulp": "gulp",
-    "test": "gulp test:travis",
+    "test": "gulp lint test:travis",
     "electron": "TUMBLOTTE_ENV=dev electron app/",
     "electron.release": "electron app/"
   },
@@ -19,6 +19,7 @@
   "devDependencies": {
     "app-module-path": "^1.0.5",
     "babel-core": "^6.5.2",
+    "babel-eslint": "^4.1.8",
     "babel-plugin-transform-decorators": "^6.3.13",
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
@@ -29,7 +30,10 @@
     "chai-as-promised": "^5.2.0",
     "chai-enzyme": "^0.4.0",
     "enzyme": "^1.6.0",
+    "eslint": "^2.0.0",
+    "eslint-plugin-react": "^3.16.1",
     "gulp": "^3.9.0",
+    "gulp-eslint": "^2.0.0",
     "gulp-livereload": "^3.8.1",
     "gulp-mocha": "^2.2.0",
     "gulp-sourcemap": "^1.0.1",

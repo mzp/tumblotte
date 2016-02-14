@@ -2,6 +2,7 @@ var gulp = require('gulp');
 
 var babelify = require('babelify');
 var browserify = require('browserify');
+var eslint = require('gulp-eslint');
 var fontAwesome = require('node-font-awesome');
 var livereload = require('gulp-livereload');
 var mocha = require('gulp-mocha');
@@ -80,6 +81,43 @@ gulp.task('test:travis', function() {
     }));
 });
 
+// ============================================================
+// Test
+// ============================================================
+function lintOption(mocha) {
+  return {
+    "extends": "eslint:recommended",
+    "parser": "babel-eslint",
+    "env": {
+      "browser": true,
+      "node": true,
+      "es6":true,
+      "mocha": mocha
+    },
+    "plugins": [ "react" ],
+    "parserOptions": { "ecmaFeatures": { "jsx": true } },
+    "rules": {
+      "react/jsx-uses-vars": 1 ,
+      "no-unused-vars": [1, {"varsIgnorePattern": "React"}]
+    }
+  };
+}
+
+gulp.task('lint:src', function () {
+  return gulp.src(['src/**/*.js'])
+    .pipe(eslint(lintOption()))
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
+});
+
+gulp.task('lint:test', function () {
+  return gulp.src(['test/**/*.js'])
+    .pipe(eslint(lintOption(true)))
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
+});
+
+gulp.task('lint', ['lint:src', 'lint:test']);
 
 // ============================================================
 // Package
