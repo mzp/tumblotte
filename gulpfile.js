@@ -121,13 +121,15 @@ gulp.task('dmg', ['package'], function() {
 // ============================================================
 // Watch
 // ============================================================
-gulp.task('watch:src', function(){
+gulp.task('watch:src', ['build'], function(){
   livereload.listen();
   gulp.watch('./src/**/*.js', ['build:js']);
+  gulp.watch('./src/**/*.jade', ['build:js']);
   gulp.watch('./assets/stylesheets/*.styl', ['build:css']);
 });
 
-gulp.task('watch:test', function(){
+gulp.task('watch:test', ['test'], function(){
   gulp.watch('./src/**/*.js', ['test']);
+  gulp.watch('./src/**/*.jade', ['test']);
   gulp.watch('./test/**/*.js', ['test']);
 });
