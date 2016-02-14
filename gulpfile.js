@@ -4,6 +4,7 @@ var appdmg = require('gulp-appdmg');
 var babelify = require('babelify');
 var browserify = require('browserify');
 var fontAwesome = require('node-font-awesome');
+var livereload = require('gulp-livereload');
 var mocha = require('gulp-mocha');
 var packager = require('electron-packager');
 var react_jade = require('react-jade');
@@ -15,7 +16,7 @@ var stylus = require('gulp-stylus');
 // Build
 // ============================================================
 function compile(debug) {
-  browserify({ entries: ['src/main.js'], debug: debug })
+  return browserify({ entries: ['src/main.js'], debug: debug })
     .transform(babelify, {
       presets: ['stage-0', 'es2015', 'react']
     })
@@ -26,7 +27,8 @@ function compile(debug) {
 };
 
 gulp.task('build:js', function() {
-  compile(true);
+  compile(true)
+    .pipe(livereload());
 });
 
 gulp.task('build:js:release', function() {
@@ -109,6 +111,7 @@ gulp.task('dmg', ['package'], function() {
 // Watch
 // ============================================================
 gulp.task('watch:src', function(){
+  livereload.listen();
   gulp.watch('./src/**/*.js', ['build:js']);
   gulp.watch('./assets/stylesheets/*.styl', ['build:css']);
 });
