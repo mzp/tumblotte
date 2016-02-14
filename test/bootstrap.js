@@ -2,4 +2,6 @@
 require('app-module-path').addPath(__dirname + '/../src/');
 
 // setup chai-enzyme
-require('chai').use(require('chai-enzyme')());
+var chai = require('chai');
+chai.use(require('chai-enzyme')());
+chai.use(require("chai-as-promised"));
