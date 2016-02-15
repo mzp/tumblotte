@@ -1,6 +1,7 @@
 import React from 'react';
 
-import DebounceTextArea from '../..//components/DebounceTextArea';
+import mapValues from 'lodash.mapvalues';
+import DebounceTextArea from '../../components/DebounceTextArea';
 import IconButton from '../../components/IconButton';
 import Preview from '../../components/Preview';
 import SelectBox from '../../components/SelectBox';
@@ -109,16 +110,20 @@ export class Editor extends React.Component {
     return {
       blogAction,
       postAction,
+      currentPostAction: this.currentPostAction(),
       fetchPosts: ::this.fetchPosts,
-      changeText: ::this.changeText,
-      openLink: ::this.openLink,
       openExternal: this.openExternal
     };
   }
 
-  changeText(post, event) {
+  currentPostAction() {
     const { postAction } = this.props;
-    postAction.change({ post, value: event.target.value });
+    const post = this.selectedPost();
+
+    return mapValues({
+      openLink: this.openLink,
+      change: postAction.change
+    }, (f) => f.bind(this, post))
   }
 
   fetchPosts() {

@@ -8,7 +8,7 @@ export default class DebounceTextArea extends React.Component {
 
     this.delayedCallback = debounce((event) => {
       const { onChange } = this.props;
-      onChange(event);
+      onChange(event.target.value);
     }, 300);
   }
 

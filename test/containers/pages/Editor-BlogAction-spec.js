@@ -21,6 +21,7 @@ describe('<Editor /> - BlogAction', () => {
   const blogAction = {};
   const postAction =  {
     create: spy(),
+    change: spy(),
     fetch: spy(),
     remove: spy(),
     select: spy(),

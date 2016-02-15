@@ -13,10 +13,10 @@
   #main.pure-g
     if post
       #editor.pure-u-1-2.editor.pure-form
-        DebounceTextArea.editor__text(contentId=post.id, content=post.content, onChange=changeText.bind(this, post))
+        DebounceTextArea.editor__text(contentId=post.id, content=post.content, onChange=currentPostAction.change)
         .editor__nav
           IconButton(primary=true, icon='rocket', onClick=postAction.post.bind(this, tumblr, post))
 
           if post.tumblrId
-            IconButton(icon='external-link', onClick=openLink.bind(this, post))
+            IconButton(icon='external-link', onClick=currentPostAction.openLink)
       Preview(title=post.title, body=post.body, onLinkClick=openExternal)

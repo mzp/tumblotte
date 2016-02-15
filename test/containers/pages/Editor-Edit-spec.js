@@ -70,11 +70,9 @@ describe('<Editor /> - Edit', () => {
      });
 
      it('calls action', () => {
-       textarea.simulate('change', { target: { value: 'xyzzy' } });
-       expect(postAction.change.calledWith(match({
-         value: 'xyzzy',
-         post: match({ id: 1 })
-       }))).to.equal(true);
+       textarea.simulate('change', 'xyzzy');
+       expect(postAction.change.calledWith(match({id: 1}), 'xyzzy')
+       ).to.equal(true);
      });
    });
 

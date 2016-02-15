@@ -18,7 +18,8 @@ describe('<Editor /> - Blog Select', () => {
     select: spy()
   };
   const postAction = {
-    create: spy()
+    create: spy(),
+    change: spy()
   };
 
   const subject = shallow(<Editor

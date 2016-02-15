@@ -15,7 +15,12 @@ describe('<DebounceTextArea />', () => {
 
     describe('event', () => {
       it('fires handler', (done) => {
-        const onChange = () => { done() };
+        // DebounceTextArea calls action async.
+        // So we need use `done`.
+        const onChange = (text) => {
+          expect(text).to.equal('bar');
+          done();
+        };
         const subject = shallow(<DebounceTextArea onChange={onChange} />);
         subject.simulate('change', {
           persist: () => {},
