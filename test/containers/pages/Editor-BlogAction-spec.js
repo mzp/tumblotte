@@ -57,9 +57,8 @@ describe('<Editor /> - BlogAction', () => {
     });
 
     it('calls action', () => {
-      global.confirm = () => true;
       button.simulate('click');
-      expect(postAction.remove.calledWith({ id: 1, content: 'baz', selected: true })).to.equal(true);
+      expect(postAction.remove.calledOnce).to.equal(true);
     });
   });
 

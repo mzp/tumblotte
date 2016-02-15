@@ -3,6 +3,7 @@ import IconButton from 'components/IconButton';
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
+import { spy } from 'sinon';
 
 describe('<IconButton />', () => {
   describe('<button />', () => {
@@ -44,6 +45,39 @@ describe('<IconButton />', () => {
     it('renders size attributes', () => {
       const subject = shallow(<IconButton icon='rocket' size='4x' />);
       expect(subject).to.contain(<FontAwesome name='rocket' size='4x' />);
+    });
+  });
+
+  describe('confirm', () => {
+    const f = spy();
+    const subject = shallow(<IconButton icon='rocket' onClick={f} />);
+
+    it('shows confirmation', () => {
+      subject.find('button').simulate('click');
+      expect(f.calledOnce).to.equal(true);
+    });
+  });
+
+  describe('confirm', () => {
+    const f = spy();
+    const subject = shallow(<IconButton icon='rocket' confirm='really?' onClick={f} />);
+
+    it('shows confirmation', () => {
+      global.confirm = spy();
+      subject.find('button').simulate('click');
+      expect(global.confirm.calledOnce).to.equal(true);
+    });
+
+    it('doesnt calls action', () => {
+      global.confirm = () => false;
+      subject.find('button').simulate('click');
+      expect(f.calledOnce).to.equal(false);
+    });
+
+    it('calls action', () => {
+      global.confirm = () => true;
+      subject.find('button').simulate('click');
+      expect(f.calledOnce).to.equal(true);
     });
   });
 });

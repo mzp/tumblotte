@@ -42,8 +42,8 @@ export default handleActions({
     ];
   },
 
-  REMOVE: (state, action) => {
-    return selectFirst(state.filter((x) => x.id != action.payload.id))
+  REMOVE: (state) => {
+    return selectFirst(state.filter((x) => x.selected));
   },
 
   SELECT: (state, action) => {

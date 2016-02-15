@@ -33,9 +33,8 @@ describe('posts reducer', () => {
   });
 
   describe('REMOVE', () => {
-    const next = reducer([ {id: 1}, { id: 42 }], {
-      type: 'REMOVE',
-      payload: { id: 42 }
+    const next = reducer([ {id: 1}, { id: 42, selected: true }], {
+      type: 'REMOVE'
     });
 
     it('removes post', () => {

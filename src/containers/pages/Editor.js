@@ -109,7 +109,6 @@ export class Editor extends React.Component {
     return {
       blogAction,
       postAction,
-      removePost: ::this.removePost,
       fetchPosts: ::this.fetchPosts,
       changeText: ::this.changeText,
       openLink: ::this.openLink,
@@ -120,18 +119,6 @@ export class Editor extends React.Component {
   changeText(post, event) {
     const { postAction } = this.props;
     postAction.change({ post, value: event.target.value });
-  }
-
-  removePost() {
-    const { posts, postAction } = this.props;
-
-    if(confirm('(๑•﹏•)?')) {
-      posts.forEach((post) => {
-        if(post.selected) {
-          postAction.remove(post);
-        }
-      });
-    }
   }
 
   fetchPosts() {
