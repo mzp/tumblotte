@@ -16,26 +16,49 @@ var stylus = require('gulp-stylus');
 // ============================================================
 // Build
 // ============================================================
-function compile(debug) {
-  return browserify({ entries: ['src/main.js'], debug: debug })
+
+// ------------------------------------------------------------
+// JavaScript
+// ------------------------------------------------------------
+function compile(name, opts) {
+  var args = {
+    entries: ['src/' + name + '.js'],
+    debug: true,
+    detectGlobals: opts.detectGlobals
+  };
+
+  return browserify(args)
     .transform(babelify, {
       presets: ['stage-0', 'es2015', 'react']
     })
     .transform(react_jade)
     .bundle()
-    .pipe( source( 'bundle.js' ) )
-    .pipe( gulp.dest( './app/' ));
+    .pipe(plumber())
+    .pipe(source(name + '.bundle.js'))
+    .pipe(gulp.dest('./app/'));
 };
 
-gulp.task('build:js', function() {
-  compile(true)
+gulp.task('build:js:main', function() {
+  compile('main', { detectGlobals: false });
+});
+
+gulp.task('build:js:renderer', function () {
+  compile('renderer', { detectGlobals: true })
+});
+
+gulp.task('build:js:renderer:reload', function () {
+  compile('renderer', { detectGlobals: true })
     .pipe(livereload());
 });
 
-gulp.task('build:js:release', function() {
-  compile(false);
-});
+gulp.task('build:js', [
+  'build:js:main',
+  'build:js:renderer'
+]);
 
+// ------------------------------------------------------------
+// Other assets
+// ------------------------------------------------------------
 gulp.task('build:font', function () {
   gulp.src(fontAwesome.fonts)
     .pipe(gulp.dest('./app/fonts'));
@@ -55,6 +78,9 @@ gulp.task('build:css', function () {
     .pipe(gulp.dest('./app/css'));
 });
 
+// ------------------------------------------------------------
+// compose task
+// ------------------------------------------------------------
 gulp.task('build', ['build:css', 'build:font', 'build:js']);
 gulp.task('default', ['build']);
 
@@ -131,7 +157,7 @@ gulp.task('lint', ['lint:src', 'lint:test']);
 // ============================================================
 // Package
 // ============================================================
-gulp.task('package', ['build:css', 'build:font', 'build:js:release'], function(done) {
+gulp.task('package', ['build:css', 'build:font', 'build:js'], function(done) {
   var packager = require('electron-packager');
   packager({
     'app-bundle-id': 'jp.mzp.tumblotte',
@@ -170,8 +196,7 @@ gulp.task('dmg', ['package'], function() {
 // ============================================================
 gulp.task('watch:src', ['build'], function(){
   livereload.listen();
-  gulp.watch('./src/**/*.js', ['build:js']);
-  gulp.watch('./src/**/*.jade', ['build:js']);
+  gulp.watch('./src/**/*', ['build:js:main', 'build:js:renderer:reload']);
   gulp.watch('./assets/stylesheets/*.styl', ['build:css']);
 });
 

@@ -2,7 +2,7 @@
   "name": "Tumblotte",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "main.bundle.js",
   "keywords": [],
   "author": "",
   "license": "ISC"
