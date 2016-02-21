@@ -1,6 +1,7 @@
 node_modules/
-app/bundle.js
+app/*.bundle.js
 app/css
 app/fonts
 package/
 *.dmg
+*.log
