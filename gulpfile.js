@@ -180,3 +180,5 @@ gulp.task('watch:test', ['test'], function(){
   gulp.watch('./src/**/*.jade', ['test']);
   gulp.watch('./test/**/*.js', ['test']);
 });
+
+gulp.task('watch', ['watch:src', 'watch:test']);
