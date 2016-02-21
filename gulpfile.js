@@ -7,6 +7,7 @@ var eslint = require('gulp-eslint');
 var fontAwesome = require('node-font-awesome');
 var livereload = require('gulp-livereload');
 var mocha = require('gulp-mocha');
+var plumber = require('gulp-plumber');
 var react_jade = require('react-jade');
 var source = require( 'vinyl-source-stream' );
 var sourcemaps = require('gulp-sourcemaps');
@@ -69,14 +70,14 @@ gulp.task('clean', function(done) {
 // ============================================================
 gulp.task('test', function() {
   gulp.src(['test/**/*.js'], { read: false })
+    .pipe(plumber())
     .pipe(mocha({
       reporter: 'nyan',
       require: 'test/bootstrap',
       compilers: {
         js: require('babel-core/register')
       }
-    }))
-    .on('error', console.log);;
+    }));
 });
 
 gulp.task('test:travis', function() {
