@@ -1,8 +1,7 @@
-// electronのrequireを使いたいので、globalをつけて
-// browserifyされるのを回避する。
+import { nodeRequire, remoteRequire } from './ModuleHelper';
+
 function setMenu(template) {
-  const remote = global.require('remote');
-  const Menu = remote.require('menu');
+  const Menu = remoteRequire('menu');
   const menu = Menu.buildFromTemplate(template);
   Menu.setApplicationMenu(menu);
 }
@@ -16,10 +15,7 @@ function fetch(name, options = {}) {
 }
 
 export default function(options) {
-  const remote = global.require('remote');
-
-  const app = remote.require('app');
-  const mainWindow = remote.getCurrentWindow();
+  const app = remoteRequire('app');
 
   const main = [
     { label: 'About Tumblotte', role: 'about' },
@@ -60,20 +56,26 @@ export default function(options) {
   const help = [
     { label: 'Send Feedback',
       click: () => {
-        global.require('shell').openExternal('https://github.com/mzp/tumblotte/issues');
+        nodeRequire('shell').openExternal('https://github.com/mzp/tumblotte/issues');
       }
     }
   ];
 
-  const develop = [
-    { label: 'Reload', accelerator: 'Command+R',
-      click: () => { mainWindow.restart(); } },
-    { label: 'Toggle Full Screen', accelerator: 'Ctrl+Command+F',
-      click: () => { mainWindow.setFullScreen(!mainWindow.isFullScreen()); } },
-    { label: 'Toggle Developer Tools', accelerator: 'Alt+Command+I',
-      click: function() { mainWindow.toggleDevTools(); }
-    }
-  ];
+  try {
+    const mainWindow = nodeRequire('remote').getCurrentWindow();
+    var develop = [
+      { label: 'Reload', accelerator: 'Command+R',
+        click: () => { mainWindow.restart(); } },
+      { label: 'Toggle Full Screen', accelerator: 'Ctrl+Command+F',
+        click: () => { mainWindow.setFullScreen(!mainWindow.isFullScreen()); } },
+      { label: 'Toggle Developer Tools', accelerator: 'Alt+Command+I',
+        click: function() { mainWindow.toggleDevTools(); }
+      }
+    ];
+  } catch(e) {
+    var develop = [
+    ];
+  }
 
   setMenu([
     { label: 'Tumblr', submenu: main },
