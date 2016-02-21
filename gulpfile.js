@@ -2,6 +2,7 @@ var gulp = require('gulp');
 
 var babelify = require('babelify');
 var browserify = require('browserify');
+var del = require('del');
 var eslint = require('gulp-eslint');
 var fontAwesome = require('node-font-awesome');
 var livereload = require('gulp-livereload');
@@ -55,6 +56,13 @@ gulp.task('build:css', function () {
 
 gulp.task('build', ['build:css', 'build:font', 'build:js']);
 gulp.task('default', ['build']);
+
+// ============================================================
+// Clean
+// ============================================================
+gulp.task('clean', function(done) {
+  del(['app/css', 'package', 'app/fonts', 'app/*.js'], done);
+});
 
 // ============================================================
 // Test
