@@ -61,9 +61,10 @@ export default function(options) {
     }
   ];
 
+  var develop = [];
   try {
     const mainWindow = nodeRequire('remote').getCurrentWindow();
-    var develop = [
+    develop = [
       { label: 'Reload', accelerator: 'Command+R',
         click: () => { mainWindow.restart(); } },
       { label: 'Toggle Full Screen', accelerator: 'Ctrl+Command+F',
@@ -73,8 +74,7 @@ export default function(options) {
       }
     ];
   } catch(e) {
-    var develop = [
-    ];
+    develop = [];
   }
 
   setMenu([

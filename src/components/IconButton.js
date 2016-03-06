@@ -5,18 +5,18 @@ const template = require('react-jade').compileFile(__dirname + '/IconButton.jade
 
 export default class IconButton extends React.Component {
   onClick() {
-    const { onClick, confirm: confirmText } = this.props;
+    const { onClick: f, confirm: confirmText } = this.props;
     if(confirmText) {
       if(global.confirm(confirmText)) {
-        onClick();
+        f();
       }
     } else {
-      onClick();
+      f();
     }
   }
 
   render() {
-    const { onClick, icon, loading, primary, ...props } = this.props;
+    const { icon, loading, primary, ...props } = this.props;
     const className = primary ?
       "primary-button pure-button" :
       "secondary-button pure-button";

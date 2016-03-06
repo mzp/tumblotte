@@ -5,14 +5,14 @@ import { nodeRequire } from './ModuleHelper';
 var app = nodeRequire('app');
 
 export default class Application {
-  constructor(dev) {
+  constructor() {
     app.on('ready', ::this.createWindow);
     app.on('activate', ::this.createWindow);
     app.on('window-all-closed', ::this.onClose);
   }
 
   createWindow() {
-    if(this.window) { return; };
+    if(this.window) { return; }
     this.window = new MainWindow(this.isDev());
     this.window.onClose(() => {
       this.window = null;
